@@ -1,0 +1,117 @@
+/* src/app/admin/components/registration-requests/list/list.component.scss */
+
+:host {
+  display: block;
+}
+
+/* Card & Table Styling */
+p-card {
+  margin-bottom: 2rem;
+}
+
+.p-card .p-card-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.container-fluid {
+  padding: 1.5rem;
+}
+
+/* Status Filter Styling */
+.p-selectbutton .p-button {
+  padding: 0.5rem 1rem;
+}
+
+/* Table Styling */
+p-table {
+  width: 100%;
+}
+
+.p-datatable .p-datatable-header {
+  background-color: #f8f9fa;
+  border-top: 1px solid #dee2e6;
+}
+
+/* Status Tags */
+p-tag {
+  font-weight: 600;
+}
+
+/* Dialog Styling */
+.p-dialog .p-dialog-content {
+  padding: 1.5rem;
+}
+
+p-fieldset {
+  margin-bottom: 1.5rem;
+}
+
+.p-fieldset .p-fieldset-legend {
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+}
+
+.p-field {
+  margin-bottom: 1rem;
+}
+
+.p-field label.font-bold {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #495057;
+}
+
+/* Grid Layout Fixes */
+.p-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -0.5rem;
+  margin-left: -0.5rem;
+}
+
+.p-col-12 {
+  width: 100%;
+  padding: 0.5rem;
+}
+
+.p-md-6 {
+  width: 50%;
+}
+
+@media screen and (max-width: 768px) {
+  .p-md-6 {
+    width: 100%;
+  }
+}
+
+/* Button Styling */
+.p-button-sm {
+  padding: 0.4rem 0.4rem;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.gap-3 {
+  gap: 1rem;
+}
+
+.flex {
+  display: flex;
+}
+
+/* Empty State */
+.text-center {
+  text-align: center;
+}
+
+/* Textarea in Rejection Reason */
+textarea.w-full {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+}

@@ -1,0 +1,82 @@
+<div class="register-container">
+  <div class="register-card">
+    <h2 class="register-title animate-in">Join En-Ticaret</h2>
+    <p class="register-subtitle animate-in">Create your account and start shopping</p>
+
+    <form [formGroup]="frm" (ngSubmit)="onSubmit(frm.value)" class="p-fluid">
+      <div class="form-section">
+        <div class="field animate-in">
+          <span class="p-float-label">
+            <input id="inputNameSurname" type="text" pInputText formControlName="nameSurname"
+                   [ngClass]="{'ng-dirty': frm.get('nameSurname')?.invalid && frm.get('nameSurname')?.touched}">
+            <label for="inputNameSurname">Full Name</label>
+          </span>
+          <small *ngIf="frm.get('nameSurname')?.invalid && frm.get('nameSurname')?.touched" class="p-error">
+            <i class="pi pi-exclamation-circle"></i> Name is required
+          </small>
+        </div>
+
+        <div class="field animate-in">
+          <span class="p-float-label">
+            <input id="username" type="text" pInputText formControlName="userName">
+            <label for="username">Username</label>
+          </span>
+          <small *ngIf="frm.get('userName')?.invalid && frm.get('userName')?.touched" class="p-error">
+            <i class="pi pi-exclamation-circle"></i> Username is required
+          </small>
+        </div>
+
+      </div>
+
+      <div class="form-section">
+        <div class="field animate-in">
+          <span class="p-float-label">
+            <input id="inputEmail" type="email" pInputText formControlName="email"
+                   [ngClass]="{'ng-dirty': frm.get('email')?.invalid && frm.get('email')?.touched}">
+            <label for="inputEmail">Email</label>
+          </span>
+          <small *ngIf="frm.get('email')?.invalid && frm.get('email')?.touched" class="p-error">
+            <i class="pi pi-exclamation-circle"></i> Valid email is required
+          </small>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="field animate-in">
+          <span class="p-float-label">
+            <p-password id="inputPassword" formControlName="password" [toggleMask]="true"
+                        [ngClass]="{'ng-dirty': frm.get('password')?.invalid && frm.get('password')?.touched}"
+                        [feedback]="true" promptLabel="Choose a password" weakLabel="Too simple"
+                        mediumLabel="Average complexity" strongLabel="Complex password"
+                        placeholder="Password"></p-password>
+          </span>
+          <small *ngIf="frm.get('password')?.invalid && frm.get('password')?.touched" class="p-error">
+            <i class="pi pi-exclamation-circle"></i> Password is required
+          </small>
+        </div>
+
+        <div class="field animate-in">
+          <span class="p-float-label">
+            <p-password id="inputPasswordRepeat" formControlName="passwordRepeat" [toggleMask]="true"
+                        [ngClass]="{'ng-dirty': frm.get('passwordRepeat')?.invalid && frm.get('passwordRepeat')?.touched}"
+                        [feedback]="false"
+                        placeholder="Password Confirm"></p-password>
+          </span>
+          <small *ngIf="frm.get('passwordRepeat')?.invalid && frm.get('passwordRepeat')?.touched" class="p-error">
+            <i class="pi pi-exclamation-circle"></i> Please confirm your password
+          </small>
+        </div>
+      </div>
+
+      <div class="checkbox-field animate-in">
+        <p-checkbox [binary]="true" inputId="terms"></p-checkbox>
+        <label for="terms">I agree to the <a href="/terms" target="_blank">Terms & Conditions</a></label>
+      </div>
+
+      <div class="button-container animate-in">
+        <p-button type="submit" label="Create Account" icon="pi pi-user-plus" [disabled]="frm.invalid" styleClass="p-button-raised"></p-button>
+        <a class="login-link" routerLink="/login">Already have an account? Log in</a>
+      </div>
+    </form>
+  </div>
+</div>

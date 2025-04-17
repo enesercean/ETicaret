@@ -1,0 +1,439 @@
+// Main container with background gradient
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 2rem;
+}
+
+// Card with glassmorphism effect
+.login-card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 3rem;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(var(--primary-color-rgb), 0.2), rgba(var(--primary-color-rgb), 0.05));
+    z-index: -1;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -50%;
+    right: -50%;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(var(--primary-color-rgb), 0.05), rgba(var(--primary-color-rgb), 0.2));
+    z-index: -1;
+  }
+}
+
+// Title with modern typography
+.login-title {
+  color: var(--primary-color);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  letter-spacing: -0.5px;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 70px;
+    height: 4px;
+    background-color: var(--primary-color);
+    margin: 0.5rem auto 0;
+    border-radius: 2px;
+  }
+}
+
+// Subtle subtitle
+.login-subtitle {
+  color: var(--text-color-secondary);
+  margin-bottom: 2.5rem;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+// Form fields styling
+.p-fluid .field {
+  margin-bottom: 1.8rem;
+  position: relative;
+
+  &:focus-within {
+    label {
+      color: var(--primary-color);
+    }
+  }
+}
+
+// Input styling
+:host ::ng-deep {
+  .p-inputtext {
+    border-radius: 8px;
+    padding: 1rem 1rem;
+    border: 1px solid #ced4da;
+    transition: all 0.3s;
+    width: 100%;
+
+    &:hover {
+      border-color: var(--primary-300);
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.2);
+    }
+  }
+
+  .p-float-label {
+    display: block;
+    position: relative;
+    width: 100%;
+
+    label {
+      position: absolute;
+      pointer-events: none;
+      top: 1rem; // Güncellendi
+      left: 1rem;
+      transform: translateY(0); // Güncellendi
+      transition: all 0.2s ease;
+      color: #6c757d;
+      font-weight: normal;
+      font-size: 1rem;
+      margin: 0;
+      z-index: 1;
+    }
+
+    input:focus ~ label,
+    input.p-filled ~ label,
+    .p-inputwrapper-focus ~ label,
+    .p-inputwrapper-filled ~ label {
+      top: -0.75rem;
+      font-size: 0.75rem;
+      background-color: white;
+      padding: 0 0.25rem;
+      left: 0.75rem;
+      transform: translateY(0);
+      font-weight: 500;
+      z-index: 2;
+    }
+  }
+
+  .p-password {
+    width: 100%;
+
+    input {
+      width: 100%;
+      border-radius: 8px;
+      padding: 1rem 1rem;
+    }
+
+    .p-password-panel {
+      margin-top: 5px;
+    }
+
+    .p-float-label {
+      label {
+        top: 1rem; // Güncellendi
+        left: 1rem;
+        transform: translateY(0); // Güncellendi
+      }
+
+      input:focus ~ label,
+      input.p-filled ~ label,
+      .p-inputwrapper-focus ~ label,
+      .p-inputwrapper-filled ~ label {
+        top: -0.75rem;
+        font-size: 0.75rem;
+        background-color: white;
+        padding: 0 0.25rem;
+        left: 0.75rem;
+        transform: translateY(0);
+        font-weight: 500;
+        z-index: 2;
+      }
+    }
+  }
+
+  .p-checkbox {
+    margin-right: 0.5rem;
+  }
+}
+
+// Error message styling
+small.p-error {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  position: absolute;
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Remember me and forgot password row
+.remember-forgot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+
+  .remember-me {
+    display: flex;
+    align-items: center;
+
+    label {
+      color: var(--text-color);
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+  }
+
+  .forgot-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+    font-weight: 500;
+
+    &:hover {
+      color: var(--primary-600);
+      text-decoration: underline;
+    }
+  }
+}
+
+// Button container
+.button-container {
+  margin-bottom: 2rem;
+  // Button styling
+  ::ng-deep .p-button {
+    border-radius: 30px;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    transition: transform 0.3s, box-shadow 0.3s;
+    width: 100%;
+    height: 3.5rem;
+
+    &:enabled:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(var(--primary-color-rgb), 0.3);
+    }
+
+    &:enabled:active {
+      transform: translateY(0);
+    }
+
+    .p-button-icon {
+      font-size: 1.1rem;
+    }
+  }
+}
+
+// Divider with text
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: var(--text-color-secondary);
+  margin: 1.5rem 0;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid var(--surface-border);
+  }
+
+  &::before {
+    margin-right: 1rem;
+  }
+
+  &::after {
+    margin-left: 1rem;
+  }
+
+  span {
+    font-size: 0.9rem;
+    padding: 0 10px;
+  }
+}
+
+// Social login buttons area
+.social-login {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+// Google Button styling
+.google-signin-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 240px;
+  margin: 0 auto;
+  height: 3.5rem;
+  background-color: white;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-family: 'Roboto', 'Arial', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #3c4043;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    border-color: #c6c6c6;
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    background-color: #f1f3f4;
+    transform: translateY(0);
+  }
+
+  img {
+    height: 20px;
+    width: 20px;
+    object-fit: contain;
+  }
+}
+
+// Signup link container
+.signup-link-container {
+  text-align: center;
+  margin-top: 1rem;
+  color: var(--text-color-secondary);
+  font-size: 0.95rem;
+
+  .signup-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 0.5rem;
+    position: relative;
+
+    &:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -2px;
+      left: 0;
+      background-color: var(--primary-color);
+      transition: width 0.3s ease;
+    }
+
+    &:hover {
+      color: var(--primary-600);
+
+      &:after {
+        width: 100%;
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media screen and (max-width: 768px) {
+  .login-card {
+    padding: 2rem;
+  }
+
+  .login-title {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .login-container {
+    padding: 1rem;
+  }
+
+  .login-card {
+    padding: 1.5rem;
+    border-radius: 12px;
+  }
+
+  .login-title {
+    font-size: 1.8rem;
+  }
+
+  .remember-forgot {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+}
+
+// Animation for elements
+.animate-in {
+  animation: slideUp 0.5s forwards;
+  opacity: 0;
+}
+
+@for $i from 1 through 8 {
+  .field:nth-child(#{$i}),
+  .login-title,
+  .login-subtitle,
+  .remember-forgot,
+  .button-container,
+  .divider,
+  .social-login,
+  .signup-link-container {
+    animation-delay: $i * 0.1s;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

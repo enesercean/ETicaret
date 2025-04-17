@@ -1,0 +1,429 @@
+<div class="homepage">
+  <section class="hero-slider">
+    <div class="slider-container">
+       Slide 1 
+      <div class="slide" [class.active]="currentSlide === 0">
+        <div class="slide-content">
+          <h2>Summer Collection 2025</h2>
+          <p>Discover the latest trends for the season</p>
+          <button class="btn-primary" routerLink="/products/list">Shop Now</button>
+        </div>
+        <div class="slide-image" style="background-image: url('anas.jpg');"></div>
+      </div>
+
+       Slide 2 
+      <div class="slide" [class.active]="currentSlide === 1">
+        <div class="slide-content">
+          <h2>New Tech Arrivals</h2>
+          <p>Explore the latest gadgets and electronics</p>
+          <button class="btn-primary" routerLink="products/list">Discover Now</button>
+        </div>
+        <div class="slide-image" style="background-image: url('electronics.png');"></div>
+      </div>
+
+       Slide 3 
+      <div class="slide" [class.active]="currentSlide === 2">
+        <div class="slide-content">
+          <h2>Home & Living Collection</h2>
+          <p>Transform your space with premium home decor</p>
+          <button class="btn-primary" routerLink="/products/list">View Collection</button>
+        </div>
+        <div class="slide-image" style="background-image: url('home.png');"></div>
+      </div>
+    </div>
+
+     Navigation arrows 
+    <div class="slider-controls">
+      <button class="slider-arrow prev" (click)="prevSlide()">
+        <i class="pi pi-chevron-left"></i>
+      </button>
+      <button class="slider-arrow next" (click)="nextSlide()">
+        <i class="pi pi-chevron-right"></i>
+      </button>
+    </div>
+
+     Slide indicators 
+    <div class="slider-indicators">
+      <span class="indicator" [class.active]="currentSlide === 0" (click)="goToSlide(0)"></span>
+      <span class="indicator" [class.active]="currentSlide === 1" (click)="goToSlide(1)"></span>
+      <span class="indicator" [class.active]="currentSlide === 2" (click)="goToSlide(2)"></span>
+    </div>
+  </section>
+
+
+   Features Bar 
+  <section class="features-bar">
+    <div class="container">
+      <div class="feature">
+        <i class="pi pi-truck"></i>
+        <div class="feature-text">
+          <h4>Free Shipping</h4>
+          <p>On orders over $50</p>
+        </div>
+      </div>
+      <div class="feature">
+        <i class="pi pi-sync"></i>
+        <div class="feature-text">
+          <h4>Easy Returns</h4>
+          <p>30 day return policy</p>
+        </div>
+      </div>
+      <div class="feature">
+        <i class="pi pi-shield"></i>
+        <div class="feature-text">
+          <h4>Secure Payments</h4>
+          <p>Protected by encryption</p>
+        </div>
+      </div>
+      <div class="feature">
+        <i class="pi pi-headset"></i>
+        <div class="feature-text">
+          <h4>24/7 Support</h4>
+          <p>We're here to help</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+   Categories Showcase 
+  <section class="categories-showcase">
+    <div class="container">
+      <h2 class="section-title">Shop By Category</h2>
+      <div class="categories-grid">
+        <div class="category-card">
+          <div class="category-image" style="background-image: url('electronics.png');"></div>
+          <h3>Electronics</h3>
+          <a href="#" class="category-link">View All</a>
+        </div>
+        <div class="category-card">
+          <div class="category-image" style="background-image: url('fashion.jpg');"></div>
+          <h3>Fashion</h3>
+          <a href="#" class="category-link">View All</a>
+        </div>
+        <div class="category-card">
+          <div class="category-image" style="background-image: url('home.png');"></div>
+          <h3>Home & Living</h3>
+          <a href="#" class="category-link">View All</a>
+        </div>
+        <div class="category-card">
+          <div class="category-image" style="background-image: url('beauty.jpg');"></div>
+          <h3>Beauty</h3>
+          <a href="#" class="category-link">View All</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+   Trending Products 
+  <section class="product-carousel">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Trending Now</h2>
+        <a href="#" class="view-all">View All</a>
+      </div>
+      <div class="products-slider">
+        <div class="product-card">
+          <div class="badge">New</div>
+          <div class="product-image" style="background-image: url('homeProduct/product1.jpg');"></div>
+          <div class="product-info">
+            <div class="product-category">Electronics</div>
+            <h3 class="product-title">Wireless Noise Cancelling Headphones</h3>
+            <div class="product-rating">
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star"></i>
+              <span>(24)</span>
+            </div>
+            <div class="product-price">
+              <span class="current">$199.99</span>
+              <span class="original">$249.99</span>
+              <span class="discount">-20%</span>
+            </div>
+            <button class="btn-add-cart">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image" style="background-image: url('homeProduct/product2.jpg');"></div>
+          <div class="product-info">
+            <div class="product-category">Fashion</div>
+            <h3 class="product-title">Premium Cotton T-Shirt</h3>
+            <div class="product-rating">
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+              <span>(42)</span>
+            </div>
+            <div class="product-price">
+              <span class="current">$29.99</span>
+            </div>
+            <button class="btn-add-cart">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="badge">Sale</div>
+          <div class="product-image" style="background-image: url('homeProduct/mugset.jpg');"></div>
+          <div class="product-info">
+            <div class="product-category">Home & Living</div>
+            <h3 class="product-title">Ceramic Coffee Mug Set</h3>
+            <div class="product-rating">
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star"></i>
+              <i class="pi pi-star"></i>
+              <span>(18)</span>
+            </div>
+            <div class="product-price">
+              <span class="current">$24.99</span>
+              <span class="original">$34.99</span>
+              <span class="discount">-29%</span>
+            </div>
+            <button class="btn-add-cart">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image" style="background-image: url('homeProduct/product4.jpg');"></div>
+          <div class="product-info">
+            <div class="product-category">Beauty</div>
+            <h3 class="product-title">Natural Skincare Gift Set</h3>
+            <div class="product-rating">
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-half"></i>
+              <span>(37)</span>
+            </div>
+            <div class="product-price">
+              <span class="current">$49.99</span>
+            </div>
+            <button class="btn-add-cart">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="special-offer">
+    <div class="container">
+      <div class="offer-content">
+        <h2>Special Offer</h2>
+        <h3>Get 30% Off on Selected Items</h3>
+        <p>Limited time offer. Don't miss out!</p>
+        <div class="countdown">
+          <div class="countdown-item">
+            <span class="number">02</span>
+            <span class="label">Days</span>
+          </div>
+          <div class="countdown-item">
+            <span class="number">18</span>
+            <span class="label">Hours</span>
+          </div>
+          <div class="countdown-item">
+            <span class="number">45</span>
+            <span class="label">Minutes</span>
+          </div>
+          <div class="countdown-item">
+            <span class="number">30</span>
+            <span class="label">Seconds</span>
+          </div>
+        </div>
+        <button class="btn-secondary">Shop the Sale</button>
+      </div>
+    </div>
+  </section>
+
+   New Arrivals 
+  <section class="product-carousel">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">New Arrivals</h2>
+        <a href="#" class="view-all">View All</a>
+      </div>
+      <div class="products-slider">
+        <!-- Mevcut Ürün -->
+        <div class="product-card">
+          <div class="badge">New</div>
+          <div class="product-image" style="background-image: url('homeProduct/product5.jpg');"></div>
+          <div class="product-info">
+            <div class="product-category">Electronics</div>
+            <h3 class="product-title">Smart Fitness Watch</h3>
+            <div class="product-rating">
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star"></i>
+              <span>(15)</span>
+            </div>
+            <div class="product-price">
+              <span class="current">$89.99</span>
+            </div>
+            <button class="btn-add-cart">Add to Cart</button>
+          </div>
+        </div>
+
+        <!-- Yeni Ürün 1 -->
+        <div class="product-card">
+          <div class="badge">New</div>
+          <div class="product-image" style="background-image: url('homeProduct/product6.jpg');"></div>
+          <div class="product-info">
+            <div class="product-category">Home & Kitchen</div>
+            <h3 class="product-title">Wireless Blender</h3>
+            <div class="product-rating">
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+              <span>(28)</span>
+            </div>
+            <div class="product-price">
+              <span class="current">$49.99</span>
+            </div>
+            <button class="btn-add-cart">Add to Cart</button>
+          </div>
+        </div>
+
+        <!-- Yeni Ürün 2 -->
+        <div class="product-card">
+          <div class="badge">New</div>
+          <div class="product-image" style="background-image: url('homeProduct/product7.jpg');"></div>
+          <div class="product-info">
+            <div class="product-category">Fashion</div>
+            <h3 class="product-title">Leather Backpack</h3>
+            <div class="product-rating">
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star"></i>
+              <i class="pi pi-star"></i>
+              <span>(10)</span>
+            </div>
+            <div class="product-price">
+              <span class="current">$129.99</span>
+            </div>
+            <button class="btn-add-cart">Add to Cart</button>
+          </div>
+        </div>
+
+        <!-- Yeni Ürün 3 -->
+        <div class="product-card">
+          <div class="badge">New</div>
+          <div class="product-image" style="background-image: url('homeProduct/product8.jpg');"></div>
+          <div class="product-info">
+            <div class="product-category">Laptops</div>
+            <h3 class="product-title">High-Performance Laptop</h3>
+            <div class="product-rating">
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-half"></i>
+              <span>(72)</span>
+            </div>
+            <div class="product-price">
+              <span class="current">$899.99</span>
+            </div>
+            <button class="btn-add-cart">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+   Customer Reviews 
+  <section class="testimonials">
+    <div class="container">
+      <h2 class="section-title">What Our Customers Say</h2>
+      <div class="testimonials-slider">
+        <div class="testimonial">
+          <div class="testimonial-rating">
+            <i class="pi pi-star-fill"></i>
+            <i class="pi pi-star-fill"></i>
+            <i class="pi pi-star-fill"></i>
+            <i class="pi pi-star-fill"></i>
+            <i class="pi pi-star-fill"></i>
+          </div>
+          <p class="testimonial-text">"Great quality products and fast shipping. I've been a loyal customer for over a year now and never been disappointed!"</p>
+          <div class="testimonial-author">
+            <img src="customer1.jpg" alt="Customer">
+            <div>
+              <h4>Sarah Johnson</h4>
+              <p>Verified Buyer</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial">
+          <div class="testimonial-rating">
+            <i class="pi pi-star-fill"></i>
+            <i class="pi pi-star-fill"></i>
+            <i class="pi pi-star-fill"></i>
+            <i class="pi pi-star-fill"></i>
+            <i class="pi pi-star-fill"></i>
+          </div>
+          <p class="testimonial-text">"The customer service is exceptional! Had an issue with my order and they resolved it immediately. Will definitely shop here again."</p>
+          <div class="testimonial-author">
+            <img src="customer2.jpg" alt="Customer">
+            <div>
+              <h4>Michael Thomas</h4>
+              <p>Verified Buyer</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+   Featured Brands 
+  <section class="brands">
+    <div class="container">
+      <h2 class="section-title">Featured Brands</h2>
+      <div class="brands-slider">
+        <div class="brand">
+          <img src="brandlogo/apple.png" alt="Brand">
+        </div>
+        <div class="brand">
+          <img src="brandlogo/nike.png" alt="Brand">
+        </div>
+        <div class="brand">
+          <img src="brandlogo/loreal.png" alt="Brand">
+        </div>
+        <div class="brand">
+          <img src="brandlogo/samsung.png" alt="Brand">
+        </div>
+        <div class="brand">
+          <img src="brandlogo/adidas.png" alt="Brand">
+        </div>
+        <div class="brand">
+          <img src="brandlogo/asus.png" alt="Brand">
+        </div>
+      </div>
+    </div>
+  </section>
+
+   Newsletter Subscription 
+  <section class="newsletter-subscription">
+    <div class="container">
+      <div class="newsletter-content">
+        <h2>Subscribe to Our Newsletter</h2>
+        <p>Get the latest updates on new products and upcoming sales</p>
+        <div class="newsletter-form">
+          <input type="email" placeholder="Your email address">
+          <button>Subscribe</button>
+        </div>
+        <div class="newsletter-privacy">
+          <p>By subscribing you agree to our <a href="#">Privacy Policy</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,368 @@
+// Variables
+:root {
+  --sidebar-width: 200px;
+  --sidebar-bg: #ffffff;
+  --sidebar-color: #64748b;
+  --sidebar-hover-bg: #f8fafc;
+  --sidebar-active-color: #6366f1;
+  --sidebar-active-bg: rgba(99, 102, 241, 0.08);
+  --sidebar-header-height: 70px;
+  --sidebar-footer-height: 60px;
+  --sidebar-section-color: #94a3b8;
+  --sidebar-border: #e2e8f0;
+  --sidebar-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --badge-bg: #6366f1;
+  --badge-warning: #f59e0b;
+  --sidebar-z-index: -1; // Sidebar z-index değişkeni ekledim ve -1 yaptım
+}
+
+// Main Sidebar Container
+.admin-sidebar {
+  width: var(--sidebar-width);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--sidebar-bg);
+  color: var(--sidebar-color);
+  font-family: var(--font-family, 'Inter', sans-serif);
+  box-shadow: var(--sidebar-box-shadow);
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+  }
+}
+
+// Sidebar Header
+.sidebar-header {
+  height: var(--sidebar-header-height);
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--sidebar-border);
+  position: sticky;
+  top: 0;
+  background-color: var(--sidebar-bg);
+  z-index: -1;
+}
+
+.admin-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  i {
+    font-size: 1.5rem;
+    color: var(--sidebar-active-color);
+    filter: drop-shadow(0 0 2px rgba(99, 102, 241, 0.3));
+  }
+
+  .admin-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #334155;
+    letter-spacing: -0.5px;
+    white-space: nowrap;
+  }
+}
+
+// Sidebar Content
+.sidebar-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 0;
+  z-index: 0;
+}
+
+// User Info Section
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.user-avatar {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .status-badge {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid var(--sidebar-bg);
+
+    &.online {
+      background-color: #10b981;
+    }
+  }
+}
+
+.user-details {
+  flex: 1;
+  overflow: hidden;
+
+  .user-name {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #334155;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .user-role {
+    font-size: 0.8rem;
+    color: var(--sidebar-section-color);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    i {
+      font-size: 0.7rem;
+      color: var(--sidebar-active-color);
+    }
+  }
+}
+
+// Menu Section
+.menu-section {
+  margin-bottom: 1.5rem;
+
+  .section-label {
+    padding: 0 1.5rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--sidebar-section-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+}
+
+// Menu Items
+.menu-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-item {
+  a {
+    display: flex;
+    align-items: center;
+    padding: 0.6rem 1.5rem;
+    text-decoration: none;
+    color: var(--sidebar-color);
+    transition: all 0.2s ease;
+    position: relative;
+    border-radius: 0;
+    margin: 2px 0;
+
+    &:hover {
+      background-color: var(--sidebar-hover-bg);
+      color: var(--sidebar-active-color);
+    }
+
+    &.active {
+      background-color: var(--sidebar-active-bg);
+      color: var(--sidebar-active-color);
+      font-weight: 500;
+      border-radius: 0 4px 4px 0;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background-color: var(--sidebar-active-color);
+      }
+
+      .menu-icon {
+        i {
+          color: var(--sidebar-active-color);
+        }
+      }
+    }
+  }
+}
+
+.menu-icon {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.75rem;
+  border-radius: 6px;
+
+  i {
+    font-size: 1.05rem;
+  }
+}
+
+.menu-label {
+  flex: 1;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.menu-badge {
+  font-size: 0.65rem;
+  background-color: var(--badge-bg);
+  color: white;
+  border-radius: 30px;
+  padding: 0.15rem 0.5rem;
+  font-weight: 600;
+
+  &.warning {
+    background-color: var(--badge-warning);
+  }
+}
+
+// Sidebar Footer
+.sidebar-footer {
+  height: var(--sidebar-footer-height);
+  border-top: 1px solid var(--sidebar-border);
+  padding: 0 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  bottom: 0;
+  background-color: var(--sidebar-bg);
+  z-index: -1;
+}
+
+.footer-action {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--sidebar-color);
+  transition: color 0.2s ease;
+  padding: 0.6rem;
+  border-radius: 6px;
+
+  &:hover {
+    color: var(--sidebar-active-color);
+    background-color: var(--sidebar-hover-bg);
+  }
+
+  &.logout {
+    color: #ef4444;
+
+    &:hover {
+      background-color: rgba(239, 68, 68, 0.08);
+      color: #ef4444;
+    }
+  }
+
+  i {
+    font-size: 1.1rem;
+  }
+
+  .action-label {
+    font-size: 0.85rem;
+    white-space: nowrap;
+    font-weight: 500;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 992px) {
+  .sidebar-header {
+    padding: 0 1rem;
+  }
+
+  .user-info {
+    padding: 0.5rem 1rem;
+  }
+
+  .menu-item a {
+    padding: 0.6rem 1rem;
+  }
+
+  .section-label {
+    padding: 0 1rem;
+  }
+
+  .sidebar-footer {
+    padding: 0 1rem;
+  }
+}
+
+// For collapsed sidebar state
+:host-context(.admin-sidebar-collapsed) {
+  .admin-title,
+  .user-details,
+  .section-label,
+  .menu-label,
+  .action-label {
+    display: none;
+  }
+
+  .user-info {
+    justify-content: center;
+    padding: 0.75rem 0;
+  }
+
+  .menu-icon {
+    margin-right: 0;
+  }
+
+  .menu-item a {
+    justify-content: center;
+    padding: 0.6rem 0;
+  }
+
+  .menu-badge {
+    position: absolute;
+    top: 0;
+    right: 4px;
+    height: 6px;
+    width: 6px;
+    padding: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sidebar-footer {
+    justify-content: center;
+
+    .footer-action {
+      padding: 0.5rem;
+    }
+  }
+}

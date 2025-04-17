@@ -1,0 +1,52 @@
+<div class="main-container">
+  <!-- Top navigation bar -->
+  <nav class="top-nav">
+    <div class="container">
+      <ul>
+        <li><a routerLink="/sellwithus"><i class="pi pi-tag"></i> Sell with Us</a></li>
+        <li><a href="#"><i class="pi pi-envelope"></i> info&#64;enticaret.com</a></li>
+        <li><a routerLink="/help" href="#"><i class="pi pi-question-circle"></i> Help</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Header with logo and auth buttons -->
+  <header class="site-header">
+    <div class="container header-content">
+      <div class="logo">
+        <h1>En-TİCARET</h1>
+      </div>
+
+      <div class="auth-buttons">
+        <ng-container *ngIf="!authService.isAuthenticated">
+          <p-button label="Login" icon="pi pi-sign-in" [raised]="true" severity="success" routerLink="/login" styleClass="mr-2"></p-button>
+          <p-button label="Register" icon="pi pi-user-plus" variant="text" severity="secondary" routerLink="/register"></p-button>
+        </ng-container>
+        <ng-container *ngIf="authService.isAuthenticated">
+          <p-button label="Dashboard" icon="pi pi-th-large" [raised]="true" severity="secondary" routerLink="/admin" styleClass="mr-2" *ngIf="authService.hasRoleOrHigher('EmployeeRead')"></p-button>
+          <p-splitButton label="My Account" icon="pi pi-user" [model]="accountItems" [raised]="true" severity="secondary" styleClass="mr-2" (onClick)="navigateToAccount()"></p-splitButton>
+          <p-button label="Log Out" icon="pi pi-sign-out" [raised]="true" severity="danger" (click)="LogOut()"></p-button>
+        </ng-container>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main navigation menu -->
+  <div class="main-nav">
+    <div class="container">
+      <p-menubar [model]="items" styleClass="border-none shadow-2"></p-menubar>
+    </div>
+  </div>
+
+  <!-- Main content area -->
+  <main class="content">
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+    <!-- Global spinner overlay -->
+    <div *ngIf="spinnerService.loading$ | async" class="spinner-overlay">
+      <p-progressSpinner styleClass="w-4rem h-4rem"></p-progressSpinner>
+    </div>
+  </main>
+  <app-sharedfooter></app-sharedfooter>
+</div>

@@ -1,0 +1,130 @@
+<!-- src/app/admin/components/employee/list/list.component.html -->
+<p-card styleClass="mt-4">
+  <ng-template pTemplate="header">
+    <div class="p-3 flex justify-content-between align-items-center">
+      <h4 class="m-0">Employees List</h4>
+      <button pButton pRipple
+              icon="pi pi-refresh"
+              class="p-button-outlined p-button-sm"
+              (click)="loadEmployees()"
+              [loading]="loading"
+              pTooltip="Reload data">
+      </button>
+    </div>
+  </ng-template>
+
+  <p-table [value]="employees"
+           [paginator]="true"
+           [rows]="10"
+           [showCurrentPageReport]="true"
+           [loading]="loading"
+           styleClass="p-datatable-gridlines"
+           [rowsPerPageOptions]="[5, 10, 25]"
+           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} employees"
+           responsiveLayout="scroll">
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="username">Username <p-sortIcon field="username"></p-sortIcon></th>
+        <th>Name</th>
+        <th>Email</th>
+        <th pSortableColumn="roles">Role <p-sortIcon field="roles"></p-sortIcon></th>
+        <th>Assigned Date</th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-employee>
+      <tr>
+        <td>{{ employee.userName }}</td>
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.email }}</td>
+        <td>
+          <p-tag [severity]="getRoleSeverity(employee.role)"
+                 [value]="getRoleName(employee.role)">
+          </p-tag>
+        </td>
+        <td>{{ employee.assignedDate }}</td>
+        <td>
+          <div class="flex gap-2" *ngIf="employee.role !== 'No Role'">
+            <button pButton pRipple
+                    icon="pi pi-cog"
+                    class="p-button-rounded p-button-primary p-button-sm"
+                    (click)="openChangeRoleDialog(employee)"
+                    pTooltip="Change Role">
+            </button>
+            <button pButton pRipple
+                    icon="pi pi-times"
+                    class="p-button-rounded p-button-danger p-button-sm"
+                    (click)="confirmRemoveEmployee(employee)"
+                    pTooltip="Remove Employee Permissions">
+            </button>
+          </div>
+          <div *ngIf="employee.role === 'NoRole'" class="text-muted">
+            <small><i>No actions available</i></small>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="6" class="text-center p-4">
+          <div class="flex flex-column align-items-center">
+            <i class="pi pi-users" style="font-size: 2rem"></i>
+            <p>No employees found.</p>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-card>
+
+<!-- Change Role Dialog -->
+<p-dialog header="Change Employee Role"
+          [(visible)]="changeRoleDialogVisible"
+          [modal]="true"
+          [style]="{width: '450px'}"
+          [draggable]="false"
+          [resizable]="false">
+
+  <div *ngIf="selectedEmployee" class="p-fluid">
+    <div class="field mb-4">
+      <p><span class="font-bold">Employee:</span> {{ selectedEmployee.name }}</p>
+      <p><span class="font-bold">Current Role:</span> {{ getRoleName(selectedEmployee.role) }}</p>
+    </div>
+
+    <div class="field">
+      <label for="newRole" class="font-bold">New Role</label>
+      <p-dropdown id="newRole"
+                  [(ngModel)]="selectedRole"
+                  [options]="roleOptions"
+                  optionLabel="name"
+                  optionValue="value"
+                  placeholder="Select a new role"
+                  [required]="true"
+                  styleClass="w-full">
+      </p-dropdown>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Cancel"
+            icon="pi pi-times"
+            class="p-button-text"
+            (click)="changeRoleDialogVisible = false">
+    </button>
+    <button pButton pRipple label="Update Role"
+            icon="pi pi-check"
+            class="p-button-text"
+            [disabled]="!selectedRole || selectedRole === selectedEmployee?.role"
+            (click)="confirmChangeRole()">
+    </button>
+  </ng-template>
+</p-dialog>
+
+<!-- Confirmation Dialog - Will be handled by ConfirmationService -->
+<p-confirmDialog [style]="{width: '450px'}"
+                 acceptButtonStyleClass="p-button-danger"
+                 rejectButtonStyleClass="p-button-text">
+</p-confirmDialog>

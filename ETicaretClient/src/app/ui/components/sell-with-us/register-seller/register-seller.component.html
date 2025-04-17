@@ -1,0 +1,261 @@
+<div class="register-seller-container">
+  <div class="register-header" *ngIf="!isSubmitted">
+    <h1>Become a Seller</h1>
+    <p class="subtitle">Fill out the form below to start your seller journey</p>
+  </div>
+
+  <div class="register-content" *ngIf="!isSubmitted">
+    <div class="register-form-container">
+      <p-steps [model]="registrationSteps" [activeIndex]="currentStep" [readonly]="false"></p-steps>
+
+      <form [formGroup]="registerForm" (ngSubmit)="submitApplication()">
+        <div class="step-content">
+          <!-- Step 1: Basic Information -->
+          <div *ngIf="currentStep === 0" class="step-pane">
+            <h2>Basic Information</h2>
+            <div class="form-grid">
+              <div class="form-field">
+                <label for="businessName">Business Name *</label>
+                <input id="businessName" type="text" pInputText formControlName="businessName">
+                <div *ngIf="registerForm.get('businessName').invalid && registerForm.get('businessName').touched" class="error">
+                  Business name is required
+                </div>
+              </div>
+              <div class="form-field">
+                <label for="businessType">Business Type *</label>
+                <p-dropdown id="businessType" [options]="businessTypes" formControlName="businessType"
+                            optionLabel="name" placeholder="Select Business Type"></p-dropdown>
+                <div *ngIf="registerForm.get('businessType').invalid && registerForm.get('businessType').touched" class="error">
+                  Business type is required
+                </div>
+              </div>
+              <div class="form-field">
+                <label for="firstName">First Name *</label>
+                <input id="firstName" type="text" pInputText formControlName="firstName">
+                <div *ngIf="registerForm.get('firstName').invalid && registerForm.get('firstName').touched" class="error">
+                  First name is required
+                </div>
+              </div>
+              <div class="form-field">
+                <label for="lastName">Last Name *</label>
+                <input id="lastName" type="text" pInputText formControlName="lastName">
+                <div *ngIf="registerForm.get('lastName').invalid && registerForm.get('lastName').touched" class="error">
+                  Last name is required
+                </div>
+              </div>
+              <div class="form-field">
+                <label for="email">Email Address *</label>
+                <input id="email" type="email" pInputText formControlName="email">
+                <div *ngIf="registerForm.get('email').invalid && registerForm.get('email').touched" class="error">
+                  Please enter a valid email address
+                </div>
+              </div>
+              <div class="form-field">
+                <label for="phone">Phone Number *</label>
+                <p-inputMask id="phone" formControlName="phone" mask="(999) 999-9999" placeholder="(999) 999-9999"></p-inputMask>
+                <div *ngIf="registerForm.get('phone').invalid && registerForm.get('phone').touched" class="error">
+                  Please enter a valid phone number
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2: Business Details -->
+          <div *ngIf="currentStep === 1" class="step-pane">
+            <h2>Business Details</h2>
+            <div class="form-grid">
+              <div class="form-field">
+                <label for="taxId">Tax ID / VAT Number *</label>
+                <input id="taxId" type="text" pInputText formControlName="taxId">
+                <div *ngIf="registerForm.get('taxId').invalid && registerForm.get('taxId').touched" class="error">
+                  Tax ID is required
+                </div>
+              </div>
+              <div class="form-field">
+                <label for="businessAddress">Business Address *</label>
+                <textarea id="businessAddress" pInputTextarea formControlName="businessAddress" rows="3"></textarea>
+                <div *ngIf="registerForm.get('businessAddress').invalid && registerForm.get('businessAddress').touched" class="error">
+                  Business address is required
+                </div>
+              </div>
+              <div class="form-field">
+                <label for="city">City *</label>
+                <input id="city" type="text" pInputText formControlName="city">
+                <div *ngIf="registerForm.get('city').invalid && registerForm.get('city').touched" class="error">
+                  City is required
+                </div>
+              </div>
+              <div class="form-field">
+                <label for="state">State/Province *</label>
+                <input id="state" type="text" pInputText formControlName="state">
+                <div *ngIf="registerForm.get('state').invalid && registerForm.get('state').touched" class="error">
+                  State/Province is required
+                </div>
+              </div>
+              <div class="form-field">
+                <label for="postalCode">Postal Code *</label>
+                <input id="postalCode" type="text" pInputText formControlName="postalCode">
+                <div *ngIf="registerForm.get('postalCode').invalid && registerForm.get('postalCode').touched" class="error">
+                  Postal code is required
+                </div>
+              </div>
+              <div class="form-field">
+                <label for="country">Country *</label>
+                <p-dropdown id="country" [options]="countries" formControlName="country"
+                            optionLabel="name" placeholder="Select Country"></p-dropdown>
+                <div *ngIf="registerForm.get('country').invalid && registerForm.get('country').touched" class="error">
+                  Country is required
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3: Product Information -->
+          <div *ngIf="currentStep === 2" class="step-pane">
+            <h2>Product Information</h2>
+            <div class="form-grid">
+              <div class="form-field full-width">
+                <label for="productCategories">Product Categories *</label>
+                <p-multiSelect id="productCategories" [options]="productCategories" formControlName="productCategories"
+                               optionLabel="name" placeholder="Select Categories" [showToggleAll]="true"></p-multiSelect>
+                <div *ngIf="registerForm.get('productCategories').invalid && registerForm.get('productCategories').touched" class="error">
+                  Please select at least one product category
+                </div>
+              </div>
+              <div class="form-field full-width">
+                <label for="productDescription">Brief Description of Your Products *</label>
+                <textarea id="productDescription" pInputTextarea formControlName="productDescription" rows="4"></textarea>
+                <div *ngIf="registerForm.get('productDescription').invalid && registerForm.get('productDescription').touched" class="error">
+                  Product description is required
+                </div>
+              </div>
+              <div class="form-field">
+                <label for="averagePrice">Average Product Price Range *</label>
+                <p-dropdown id="averagePrice" [options]="priceRanges" formControlName="averagePrice"
+                            optionLabel="name" placeholder="Select Price Range"></p-dropdown>
+                <div *ngIf="registerForm.get('averagePrice').invalid && registerForm.get('averagePrice').touched" class="error">
+                  Average price range is required
+                </div>
+              </div>
+              <div class="form-field">
+                <label for="shippingMethod">Preferred Shipping Method *</label>
+                <p-dropdown id="shippingMethod" [options]="shippingMethods" formControlName="shippingMethod"
+                            optionLabel="name" placeholder="Select Shipping Method"></p-dropdown>
+                <div *ngIf="registerForm.get('shippingMethod').invalid && registerForm.get('shippingMethod').touched" class="error">
+                  Preferred shipping method is required
+                </div>
+              </div>
+            </div>
+
+            <div class="upload-section">
+              <label>Sample Product Images (Optional)</label>
+              <p-fileUpload mode="advanced" [multiple]="true" accept="image/*" [maxFileSize]="1000000"
+                            chooseLabel="Browse" uploadLabel="Upload" cancelLabel="Cancel"></p-fileUpload>
+            </div>
+          </div>
+
+          <!-- Step 4: Terms and Submit -->
+          <div *ngIf="currentStep === 3" class="step-pane">
+            <h2>Terms & Agreements</h2>
+
+            <div class="terms-content">
+              <p-scrollPanel [style]="{width: '100%', height: '200px'}">
+                <div class="terms-text">
+                  <h3>Seller Agreement</h3>
+                  <p>Welcome to our marketplace! This Seller Agreement ("Agreement") contains the terms and conditions that govern your access to and use of our Seller Services and is an agreement between you and our company.</p>
+
+                  <h4>1. Enrollment</h4>
+                  <p>To begin the enrollment process, you must complete the registration process for a seller account. You must provide us with your company name, physical address, phone number, and a valid email address, as well as any other information we may request.</p>
+
+                  <h4>2. Commission and Fees</h4>
+                  <p>You will pay us the applicable fees as described in the Fee Schedule. We may change the fees at any time but will provide at least 30 days advance notice of changes.</p>
+
+                  <h4>3. Shipping and Fulfillment</h4>
+                  <p>You are responsible for ensuring that your products are properly packaged and shipped to customers within the promised timeframe.</p>
+
+                  <h4>4. Returns and Refunds</h4>
+                  <p>You must comply with our returns and refunds policies. You are responsible for accepting and processing returns in accordance with these policies.</p>
+
+                  <h4>5. Product Listings</h4>
+                  <p>You are responsible for the accuracy and content of your product listings. You will ensure that your listings comply with all applicable laws and regulations.</p>
+                </div>
+              </p-scrollPanel>
+            </div>
+
+            <div class="agreements">
+              <p-checkbox formControlName="termsAgreed" [binary]="true" inputId="termsAgreed"></p-checkbox>
+              <label for="termsAgreed" class="checkbox-label">I have read and agree to the Seller Terms and Conditions *</label>
+              <div *ngIf="registerForm.get('termsAgreed').invalid && registerForm.get('termsAgreed').touched" class="error">
+                You must agree to the terms and conditions
+              </div>
+            </div>
+
+            <div class="agreements">
+              <p-checkbox formControlName="marketingAgreed" [binary]="true" inputId="marketingAgreed"></p-checkbox>
+              <label for="marketingAgreed" class="checkbox-label">I would like to receive marketing communications about seller events and opportunities</label>
+            </div>
+
+            <div class="review-summary">
+              <h3>Review Your Information</h3>
+              <p>Please review all information before submitting your application.</p>
+
+              <div class="summary-details">
+                <div class="summary-section">
+                  <h4>Business Information</h4>
+                  <p><strong>Business Name:</strong> {{registerForm.get('businessName').value}}</p>
+                  <p><strong>Business Type:</strong> {{registerForm.get('businessType').value?.name}}</p>
+                  <p><strong>Contact:</strong> {{registerForm.get('firstName').value}} {{registerForm.get('lastName').value}}</p>
+                </div>
+
+                <div class="summary-section">
+                  <h4>Products</h4>
+                  <p>
+                    <strong>Categories:</strong>
+                    <span *ngFor="let cat of registerForm.get('productCategories').value; let last = last">
+                      {{cat.name}}{{!last ? ', ' : ''}}
+                    </span>
+                  </p>
+                  <p><strong>Price Range:</strong> {{registerForm.get('averagePrice').value?.name}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-actions">
+          <button pButton label="Back" *ngIf="currentStep > 0" (click)="previousStep()"
+                  class="p-button-outlined"></button>
+          <button pButton label="Next" *ngIf="currentStep < 3" (click)="nextStep()"
+                  class="p-button-raised"></button>
+          <button pButton label="Submit Application" *ngIf="currentStep === 3" type="submit"
+                  class="p-button-raised p-button-success" [disabled]="!registerForm.valid"></button>
+        </div>
+      </form>
+    </div>
+
+    <div class="register-info">
+      <div class="info-card">
+        <h3><i class="pi pi-check-circle"></i> Benefits of Joining</h3>
+        <ul>
+          <li>Access to millions of customers</li>
+          <li>Easy-to-use seller dashboard</li>
+          <li>Marketing and promotional tools</li>
+          <li>Secure payment processing</li>
+          <li>Dedicated seller support</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <h3><i class="pi pi-info-circle"></i> Need Help?</h3>
+        <p>Our seller support team is here to help you through the registration process.</p>
+        <p><i class="pi pi-envelope"></i> Email: <a href="#">seller-supportetexample.com</a></p>
+        <p><i class="pi pi-phone"></i> Phone: (555) 123-4567</p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isSubmitted" class="success-message">
+    <h2>Application Submitted Successfully!</h2>
+    <p>Thank you for your application. We will review your information and contact you soon.</p>
+  </div>
+</div>

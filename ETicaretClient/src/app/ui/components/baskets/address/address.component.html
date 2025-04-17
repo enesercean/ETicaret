@@ -1,0 +1,81 @@
+<div class="address-container">
+  <h3>Address</h3>
+
+  <!-- Saved Addresses Section as Cards -->
+  <div class="saved-addresses-section" *ngIf="savedAddresses && savedAddresses.length > 0">
+    <h4>Saved Addresses</h4>
+
+    <div class="address-cards">
+      <div *ngFor="let address of savedAddresses"
+           class="address-card"
+           [ngClass]="{'selected': selectedAddressId === address.id}"
+           (click)="selectAddress(address)">
+        <div class="address-card-header">
+          <strong>{{address.name}}</strong>
+          <i class="pi pi-check-circle" *ngIf="selectedAddressId === address.id"></i>
+        </div>
+        <div class="address-card-body">
+          <p>{{address.addressDetail}}</p>
+          <p>{{address.city}}{{address.country ? ', ' + address.country : ''}}{{address.postalCode ? ', ' + address.postalCode : ''}}</p>
+          <p *ngIf="address.phoneNumber">{{address.phoneNumber}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="or-divider">
+      <span>OR</span>
+    </div>
+  </div>
+
+  <!-- New Address Form -->
+  <div class="new-address-form">
+    <h4 *ngIf="savedAddresses && savedAddresses.length > 0">Enter New Address</h4>
+    <form [formGroup]="addressForm">
+      <p-inputgroup>
+        <p-inputgroup-addon>
+          <i class="pi pi-user"></i>
+        </p-inputgroup-addon>
+        <input pInputText formControlName="name" placeholder="Name" />
+      </p-inputgroup>
+
+      <p-inputgroup>
+        <p-inputgroup-addon>
+          <i class="pi pi-home"></i>
+        </p-inputgroup-addon>
+        <input pInputText formControlName="addressDetail" placeholder="Address" />
+      </p-inputgroup>
+
+      <div class="horizontal-fields">
+        <p-inputgroup>
+          <p-inputgroup-addon>
+            <i class="pi pi-globe"></i>
+          </p-inputgroup-addon>
+          <input pInputText formControlName="city" placeholder="City" />
+        </p-inputgroup>
+
+        <p-inputgroup>
+          <p-inputgroup-addon>
+            <i class="pi pi-envelope"></i>
+          </p-inputgroup-addon>
+          <input pInputText formControlName="postalCode" placeholder="Zip Code" />
+        </p-inputgroup>
+      </div>
+
+      <p-inputgroup>
+        <p-inputgroup-addon>
+          <i class="pi pi-flag"></i>
+        </p-inputgroup-addon>
+        <input pInputText formControlName="country" placeholder="Country" />
+      </p-inputgroup>
+
+      <p-inputgroup>
+        <p-inputgroup-addon>
+          <i class="pi pi-phone"></i>
+        </p-inputgroup-addon>
+        <input pInputText formControlName="phoneNumber" placeholder="Phone" />
+      </p-inputgroup>
+
+      <button pButton type="button" label="Save Address" (click)="validateAddress()"></button>
+    </form>
+  </div>
+</div>

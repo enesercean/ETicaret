@@ -1,0 +1,53 @@
+<div class="card">
+  <h5>Category Management</h5>
+  <p-table #dt [value]="categories" [paginator]="true" [rows]="10"
+           [globalFilterFields]="['Name']" [tableStyle]="{'min-width': '75rem'}"
+           [rowHover]="true" dataKey="Id">
+    <ng-template pTemplate="caption">
+      <div class="flex flex-wrap justify-content-between align-items-center">
+        <h5 class="m-0">Categories</h5>
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" placeholder="Search..." (input)="applyFilterGlobal($event, 'contains')" />
+        </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width:3rem">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+        <th pSortableColumn="parentCategoryId">Parent Category <p-sortIcon field="parentCategoryId"></p-sortIcon></th>
+        <th style="width:8rem">Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-category>
+      <tr>
+        <td>
+          <p-tableCheckbox [value]="category"></p-tableCheckbox>
+        </td>
+        <td>{{category.Name}}</td>
+        <td>
+          <span *ngIf="category.ParentCategoryId">{{getCategoryName(category.ParentCategoryId)}}</span>
+          <span *ngIf="!category.ParentCategoryId">-</span>
+        </td>
+        <td>
+          <div class="flex align-items-center justify-content-center gap-2">
+            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-button-sm"
+                    (click)="editCategory(category)"></button>
+            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-sm"
+                    (click)="confirmDelete(category)"></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="4" class="text-center">No categories found.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

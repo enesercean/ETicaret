@@ -1,0 +1,180 @@
+:host {
+  display: block;
+}
+
+// Dialog styles
+::ng-deep .p-dialog {
+  .p-dialog-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+
+    .p-dialog-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #495057;
+    }
+  }
+
+  .p-dialog-content {
+    padding: 1.5rem;
+  }
+}
+
+// File upload area styling
+app-file-upload {
+  display: block;
+  margin-bottom: 1.5rem;
+
+  ::ng-deep .upload-area {
+    border: 2px dashed #ced4da;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.2s;
+    background-color: #f8f9fa;
+
+    &:hover {
+      border-color: #3f51b5;
+      background-color: rgba(63, 81, 181, 0.05);
+    }
+  }
+
+  ::ng-deep .upload-message {
+    font-size: 1rem;
+    color: #6c757d;
+    margin-bottom: 1rem;
+  }
+}
+
+// Image cards styling
+.card {
+  padding: 0;
+  box-shadow: none;
+  background-color: transparent;
+
+  ::ng-deep .p-carousel {
+    .p-carousel-content {
+      .p-carousel-container {
+        padding: 0.5rem 0;
+      }
+    }
+
+    .p-carousel-indicators {
+      margin-top: 1rem;
+    }
+  }
+}
+
+.rounded-border {
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.border-surface {
+  border: 1px solid #e9ecef;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 0.5rem !important;
+
+  &:hover {
+    border-color: #3f51b5;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+}
+
+// Image container
+.relative {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+
+  img {
+    object-fit: cover;
+    transition: transform 0.3s;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  ::ng-deep .p-tag {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    opacity: 0.9;
+  }
+}
+
+// Button styling and positioning outside image
+.flex.justify-between.items-center {
+  width: 100%;
+  margin-top: 0.5rem;
+
+  span {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  ::ng-deep .p-button {
+    background-color: #f44336;
+    border-color: #f44336;
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+
+    &:hover {
+      background-color: #d32f2f;
+      border-color: #d32f2f;
+    }
+
+    .p-button-label {
+      font-weight: normal;
+    }
+  }
+}
+
+// Add a subtle paste indicator
+::ng-deep .p-dialog-content::after {
+  content: "Ctrl+V ile resim yapıştırabilirsiniz";
+  display: block;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #6c757d;
+  margin-top: 1rem;
+  font-style: italic;
+  opacity: 0.7;
+}
+
+// Make dialog draggable area more visible
+::ng-deep .p-dialog-header {
+  cursor: move;
+
+  &:hover {
+    background-color: #e9ecef;
+  }
+}
+
+// Responsive adjustments
+@media screen and (max-width: 768px) {
+  ::ng-deep .p-dialog {
+    width: 95vw !important;
+    max-width: 95vw !important;
+  }
+
+  ::ng-deep .p-carousel {
+    [numVisible="3"] {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .relative {
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+  }
+}

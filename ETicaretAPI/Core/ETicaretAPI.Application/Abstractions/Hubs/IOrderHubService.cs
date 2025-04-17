@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ETicaretAPI.Application.Abstractions.Hubs
+{
+    public interface IOrderHubService
+    {
+        Task OrderAddedMessageAsync(string message);
+        Task SendMessageToSupplierUsersAsync(string supplierId, string message);
+        Task AddUserToSupplierGroupAsync(string userId, string supplierId);
+        Task RemoveUserFromSupplierGroupAsync(string userId, string supplierId);
+    }
+
+}
+

@@ -1,0 +1,51 @@
+<div class="category-create-container">
+  
+  <p-card header="Create New Category" styleClass="shadow-2">
+    <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+      <div class="p-fluid">
+        <div class="field">
+          <label for="name">Category Name</label>
+          <div class="p-inputgroup">
+            <input 
+              id="name"
+              type="text" 
+              pInputText 
+              formControlName="name" 
+              placeholder="Enter category name"
+              [ngClass]="{ 'ng-dirty': submitted && f['name'].errors }"
+            />
+          </div>
+          <small 
+            class="p-error" 
+            *ngIf="submitted && f['name'].errors?.['required']"
+          >
+            Category name is required
+          </small>
+        </div>
+        
+        <div class="field">
+          <label for="parentCategory">Parent Category</label>
+          <p-dropdown
+            id="parentCategory"
+            formControlName="parentCategoryId"
+            [options]="categories"
+            placeholder="Select a parent category (optional)"
+            styleClass="w-full"
+            [showClear]="true"
+          ></p-dropdown>
+        </div>
+        
+        <div class="field">
+          <button
+            pButton
+            type="submit"
+            label="Create Category"
+            icon="pi pi-plus"
+            [loading]="loading"
+            class="p-button-primary w-full"
+          ></button>
+        </div>
+      </div>
+    </form>
+  </p-card>
+</div>

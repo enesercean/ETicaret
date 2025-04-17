@@ -1,0 +1,123 @@
+.discount-coupon-container {
+  padding: 1.5rem 0;
+
+  .page-header {
+    margin-bottom: 2rem;
+
+    h2 {
+      color: var(--text-color);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: var(--text-color-secondary);
+      margin: 0;
+    }
+  }
+
+  .coupon-list {
+    min-height: 300px;
+
+    .empty-coupons {
+      text-align: center;
+      padding: 3rem 1rem;
+      background-color: var(--surface-50);
+      border-radius: 8px;
+
+      .empty-icon {
+        font-size: 3rem;
+        color: var(--text-color-secondary);
+        margin-bottom: 1rem;
+      }
+
+      h3 {
+        color: var(--text-color);
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      p {
+        color: var(--text-color-secondary);
+        margin-bottom: 1.5rem;
+      }
+    }
+  }
+  /* Kupon kartları için stil - kuponlar eklendiğinde kullanılacak */
+  .coupon-card {
+    display: flex;
+    margin-bottom: 1rem;
+    border: 1px dashed var(--surface-400);
+    border-radius: 8px;
+    padding: 1rem;
+    position: relative;
+    background: var(--surface-0);
+    overflow: hidden;
+
+    &:before {
+      content: '';
+      position: absolute;
+      left: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--surface-ground);
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--surface-ground);
+    }
+
+    .coupon-info {
+      flex: 1;
+
+      .coupon-code {
+        font-weight: 700;
+        font-size: 1.2rem;
+        font-family: monospace;
+        background-color: var(--surface-100);
+        padding: 0.3rem 0.6rem;
+        border-radius: 4px;
+        letter-spacing: 1px;
+      }
+
+      .coupon-amount {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--primary-color);
+        margin: 0.5rem 0;
+      }
+
+      .coupon-expiry {
+        font-size: 0.85rem;
+        color: var(--text-color-secondary);
+      }
+    }
+
+    .coupon-action {
+      display: flex;
+      align-items: center;
+    }
+  }
+  /* Responsive stil ayarlamaları */
+  @media screen and (max-width: 768px) {
+    .coupon-card {
+      flex-direction: column;
+
+      .coupon-action {
+        margin-top: 1rem;
+        justify-content: flex-start;
+      }
+    }
+  }
+}

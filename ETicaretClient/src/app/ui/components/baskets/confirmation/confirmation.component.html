@@ -1,0 +1,63 @@
+<div class="confirmation-container">
+  <h3 class="confirmation-title">Order Confirmation</h3>
+
+  <div class="confirmation-card">
+    <div *ngIf="address" class="address-section">
+      <h4 class="section-title">Address Information</h4>
+      <div class="info-row">
+        <span class="info-label">Name:</span>
+        <span class="info-value">{{ address.name }}</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Address:</span>
+        <span class="info-value">{{ address.addressDetail }}</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">City:</span>
+        <span class="info-value">{{ address.city }}</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Zip Code:</span>
+        <span class="info-value">{{ address.postalCode }}</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Country:</span>
+        <span class="info-value">{{ address.country }}</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Phone:</span>
+        <span class="info-value">{{ address.phoneNumber }}</span>
+      </div>
+    </div>
+
+    <div *ngIf="payment" class="payment-section">
+      <h4 class="section-title">Payment Information</h4>
+      <div class="info-row">
+        <span class="info-label">Card Number:</span>
+        <span class="info-value">{{ payment.cardNumber }}</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Card Holder Name:</span>
+        <span class="info-value">{{ payment.cardHolderName }}</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Expiry Date:</span>
+        <span class="info-value">{{ payment.expiryDate }}</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">CVV:</span>
+        <span class="info-value">{{ payment.cvv }}</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Installment:</span>
+        <span class="info-value">{{ payment.installment }}</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Email:</span>
+        <span class="info-value">{{ payment.email }}</span>
+      </div>
+    </div>
+  </div>
+
+  <button pButton type="button" label="Confirm Order" class="confirm-button" (click)="onConfirmOrder()"></button>
+</div>

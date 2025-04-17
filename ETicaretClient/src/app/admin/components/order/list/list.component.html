@@ -1,0 +1,31 @@
+<p-treetable [value]="filteredFiles" [columns]="cols" [scrollable]="true" [tableStyle]="{ 'min-width': '50rem', 'width': '100%' }">
+  <ng-template #caption>
+    <div class="text-xl font-bold"></div>
+    <input pInputText type="text" placeholder="Search..." (input)="filterFiles($event)" />
+    <p-select [options]="orderOptions" [(ngModel)]="selectedOption" optionLabel="name" placeholder="Select" class="w-full md:w-56" (onChange)="filterFilesByStatus($event)" />
+  </ng-template>
+  <ng-template #header let-columns>
+    <tr>
+      <th *ngFor="let col of columns">
+        {{ col.header }}
+      </th>
+      <th>Actions</th>
+    </tr>
+  </ng-template>
+  <ng-template #body let-rowNode let-rowData="rowData" let-columns="columns">
+    <tr [ttRow]="rowNode" [ngClass]="{'child-row': rowNode.node.children && rowNode.node.children.length > 0}">
+      <td *ngFor="let col of columns; let i = index">
+        <p-treeTableToggler [rowNode]="rowNode" *ngIf="i === 0" />
+        {{ rowData[col.field] }}
+      </td>
+      <td>
+        <p-button *ngIf="rowNode.node.children" icon="pi pi-check" rounded="true" severity="success" (click)="showMessage(rowData)" />
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template #summary>
+    <div style="text-align:left">
+      <p-button icon="pi pi-refresh" label="Reload" severity="warn" (click)="reloadOrders()" />
+    </div>
+  </ng-template>
+</p-treetable>

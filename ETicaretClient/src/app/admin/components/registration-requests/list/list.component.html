@@ -1,0 +1,349 @@
+<div class="container-fluid">
+  <p-card>
+    <ng-template pTemplate="header">
+      <div class="p-3">
+        <h4>Supplier Registration Requests</h4>
+      </div>
+    </ng-template>
+
+    <!-- Status Filter -->
+    <div class="p-d-flex p-ai-center p-mb-3 gap-3">
+      <label class="font-bold">Filter by status:</label>
+      <p-selectButton [options]="statusOptions"
+                      [(ngModel)]="statusFilter"
+                      optionLabel="label"
+                      optionValue="value"
+                      class="p-mr-2">
+      </p-selectButton>
+    </div>
+
+    <p-table [value]="filteredRequests"
+             [paginator]="true"
+             [rows]="10"
+             [showCurrentPageReport]="true"
+             [loading]="loading"
+             styleClass="p-datatable-gridlines p-datatable-responsive"
+             [rowsPerPageOptions]="[5, 10, 25]"
+             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} requests"
+             responsiveLayout="scroll">
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="businessName">Business Name <p-sortIcon field="businessName"></p-sortIcon></th>
+          <th pSortableColumn="businessType">Business Type <p-sortIcon field="businessType"></p-sortIcon></th>
+          <th>Contact Person</th>
+          <th pSortableColumn="email">Email <p-sortIcon field="email"></p-sortIcon></th>
+          <th>Phone</th>
+          <th>Location</th>
+          <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon></th>
+          <th pSortableColumn="createdDate">Created Date <p-sortIcon field="createdDate"></p-sortIcon></th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-request>
+        <tr>
+          <td>{{ request.businessName }}</td>
+          <td>{{ request.businessType }}</td>
+          <td>{{ request.firstName }} {{ request.lastName }}</td>
+          <td>{{ request.email }}</td>
+          <td>{{ request.phoneNumber }}</td>
+          <td>{{ request.city }}, {{ request.country }}</td>
+          <td>
+            <p-tag [severity]="getStatusSeverity(request.status)"
+                   [value]="request.status">
+            </p-tag>
+          </td>
+          <td>{{ request.createdDate | date:'medium' }}</td>
+          <td>
+            <div class="flex gap-2">
+              <button *ngIf="request.status === 'Pending'"
+                      pButton pRipple
+                      icon="pi pi-check-circle"
+                      class="p-button-rounded p-button-primary p-button-sm"
+                      (click)="openReviewModal(request)"
+                      pTooltip="Review"></button>
+              <button pButton pRipple
+                      icon="pi pi-info-circle"
+                      class="p-button-rounded p-button-info p-button-sm"
+                      (click)="openDetailsModal(request)"
+                      pTooltip="Details"></button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="9" class="text-center p-4">
+            <div class="p-d-flex p-flex-column p-ai-center">
+              <i class="pi pi-info-circle" style="font-size: 2rem"></i>
+              <p>No registration requests found.</p>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
+</div>
+
+<!-- Review Dialog -->
+<p-dialog header="Review Registration Request"
+          [(visible)]="reviewDialogVisible"
+          [modal]="true"
+          [style]="{width: '80vw'}"
+          [draggable]="false"
+          [resizable]="false"
+          appendTo="body">
+
+  <div *ngIf="selectedRequest" class="p-grid">
+    <div class="p-col-12 p-md-6">
+      <p-fieldset legend="Business Information">
+        <div class="p-grid">
+          <div class="p-col-12">
+            <div class="p-field">
+              <label class="font-bold">Name:</label>
+              <div>{{ selectedRequest.businessName }}</div>
+            </div>
+          </div>
+          <div class="p-col-12">
+            <div class="p-field">
+              <label class="font-bold">Type:</label>
+              <div>{{ selectedRequest.businessType }}</div>
+            </div>
+          </div>
+          <div class="p-col-12">
+            <div class="p-field">
+              <label class="font-bold">Tax Number:</label>
+              <div>{{ selectedRequest.taxNumber }}</div>
+            </div>
+          </div>
+          <div class="p-col-12">
+            <div class="p-field">
+              <label class="font-bold">Address:</label>
+              <div>{{ selectedRequest.businessAddress }}</div>
+            </div>
+          </div>
+          <div class="p-col-12">
+            <div class="p-field">
+              <label class="font-bold">Location:</label>
+              <div>
+                {{ selectedRequest.city }}, {{ selectedRequest.state }},
+                {{ selectedRequest.country }}, {{ selectedRequest.postalCode }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </p-fieldset>
+    </div>
+
+    <div class="p-col-12 p-md-6">
+      <p-fieldset legend="Contact Information">
+        <div class="p-grid">
+          <div class="p-col-12">
+            <div class="p-field">
+              <label class="font-bold">Name:</label>
+              <div>{{ selectedRequest.firstName }} {{ selectedRequest.lastName }}</div>
+            </div>
+          </div>
+          <div class="p-col-12">
+            <div class="p-field">
+              <label class="font-bold">Email:</label>
+              <div>{{ selectedRequest.email }}</div>
+            </div>
+          </div>
+          <div class="p-col-12">
+            <div class="p-field">
+              <label class="font-bold">Phone:</label>
+              <div>{{ selectedRequest.phoneNumber }}</div>
+            </div>
+          </div>
+        </div>
+      </p-fieldset>
+    </div>
+
+    <div class="p-col-12">
+      <p-fieldset legend="Product Information">
+        <div class="p-grid">
+          <div class="p-col-12">
+            <div class="p-field">
+              <label class="font-bold">Categories:</label>
+              <div>{{ selectedRequest.productCategories.join(', ') }}</div>
+            </div>
+          </div>
+          <div class="p-col-12">
+            <div class="p-field">
+              <label class="font-bold">Description:</label>
+              <div>{{ selectedRequest.productDescription }}</div>
+            </div>
+          </div>
+          <div class="p-col-12">
+            <div class="p-field">
+              <label class="font-bold">Average Price:</label>
+              <div>{{ selectedRequest.avaragePrice }}</div>
+            </div>
+          </div>
+          <div class="p-col-12">
+            <div class="p-field">
+              <label class="font-bold">Shipping Method:</label>
+              <div>{{ selectedRequest.shippingMethod }}</div>
+            </div>
+          </div>
+        </div>
+      </p-fieldset>
+    </div>
+
+    <div class="p-col-12" *ngIf="selectedRequest.status === 'Pending'">
+      <p-fieldset legend="Decision">
+        <div class="p-field">
+          <label for="rejectionReason" class="font-bold">Rejection Reason (required for rejection)</label>
+          <textarea id="rejectionReason" pInputTextarea rows="3"
+                    [(ngModel)]="rejectionReason"
+                    placeholder="Enter reason for rejection"
+                    class="w-full"></textarea>
+        </div>
+      </p-fieldset>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div *ngIf="selectedRequest && selectedRequest.status === 'Pending'">
+      <button pButton pRipple label="Reject" icon="pi pi-times"
+              class="p-button-danger"
+              (click)="rejectRequest(selectedRequest.id)"
+              [disabled]="!rejectionReason"></button>
+      <button pButton pRipple label="Approve" icon="pi pi-check"
+              class="p-button-success ml-2"
+              (click)="approveRequest(selectedRequest.id)"></button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<!-- Details Dialog -->
+<p-dialog header="Registration Request Details"
+          [(visible)]="detailsDialogVisible"
+          [modal]="true"
+          [style]="{width: '80vw'}"
+          [draggable]="false"
+          [resizable]="false"
+          appendTo="body">
+
+  <div *ngIf="selectedRequest" class="p-grid">
+    <div class="p-col-12 p-md-6">
+      <p-fieldset legend="Business Information">
+        <div class="p-grid">
+          <div class="p-col-12">
+            <div class="p-field">
+              <label class="font-bold">Name:</label>
+              <div>{{ selectedRequest.businessName }}</div>
+            </div>
+          </div>
+          <div class="p-col-12">
+            <div class="p-field">
+              <label class="font-bold">Type:</label>
+              <div>{{ selectedRequest.businessType }}</div>
+            </div>
+          </div>
+          <div class="p-col-12">
+            <div class="p-field">
+              <label class="font-bold">Tax Number:</label>
+              <div>{{ selectedRequest.taxNumber }}</div>
+            </div>
+          </div>
+          <div class="p-col-12">
+            <div class="p-field">
+              <label class="font-bold">Address:</label>
+              <div>{{ selectedRequest.businessAddress }}</div>
+            </div>
+          </div>
+          <div class="p-col-12">
+            <div class="p-field">
+              <label class="font-bold">Location:</label>
+              <div>
+                {{ selectedRequest.city }}, {{ selectedRequest.state }},
+                {{ selectedRequest.country }}, {{ selectedRequest.postalCode }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </p-fieldset>
+    </div>
+
+    <div class="p-col-12 p-md-6">
+      <p-fieldset legend="Contact Information">
+        <div class="p-grid">
+          <div class="p-col-12">
+            <div class="p-field">
+              <label class="font-bold">Name:</label>
+              <div>{{ selectedRequest.firstName }} {{ selectedRequest.lastName }}</div>
+            </div>
+          </div>
+          <div class="p-col-12">
+            <div class="p-field">
+              <label class="font-bold">Email:</label>
+              <div>{{ selectedRequest.email }}</div>
+            </div>
+          </div>
+          <div class="p-col-12">
+            <div class="p-field">
+              <label class="font-bold">Phone:</label>
+              <div>{{ selectedRequest.phoneNumber }}</div>
+            </div>
+          </div>
+        </div>
+      </p-fieldset>
+    </div>
+
+    <div class="p-col-12">
+      <p-fieldset legend="Product Information">
+        <div class="p-grid">
+          <div class="p-col-12">
+            <div class="p-field">
+              <label class="font-bold">Categories:</label>
+              <div>{{ selectedRequest.productCategories.join(', ') }}</div>
+            </div>
+          </div>
+          <div class="p-col-12">
+            <div class="p-field">
+              <label class="font-bold">Description:</label>
+              <div>{{ selectedRequest.productDescription }}</div>
+            </div>
+          </div>
+          <div class="p-col-12">
+            <div class="p-field">
+              <label class="font-bold">Average Price:</label>
+              <div>{{ selectedRequest.avaragePrice }}</div>
+            </div>
+          </div>
+          <div class="p-col-12">
+            <div class="p-field">
+              <label class="font-bold">Shipping Method:</label>
+              <div>{{ selectedRequest.shippingMethod }}</div>
+            </div>
+          </div>
+        </div>
+      </p-fieldset>
+    </div>
+
+    <div class="p-col-12" *ngIf="selectedRequest.status === 'Rejected'">
+      <p-fieldset legend="Rejection Information" styleClass="p-error">
+        <div class="p-field">
+          <label class="font-bold">Rejection Reason:</label>
+          <div>{{ selectedRequest.rejectionReason }}</div>
+        </div>
+      </p-fieldset>
+    </div>
+
+    <div class="p-col-12" *ngIf="selectedRequest.reviewedDate">
+      <div class="p-field">
+        <label class="font-bold">Reviewed Date:</label>
+        <div>{{ selectedRequest.reviewedDate | date:'medium' }}</div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Close" icon="pi pi-times" class="p-button-text"
+            (click)="detailsDialogVisible = false"></button>
+  </ng-template>
+</p-dialog>

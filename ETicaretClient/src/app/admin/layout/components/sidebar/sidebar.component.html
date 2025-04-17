@@ -1,0 +1,136 @@
+<div class="admin-sidebar">
+  <div class="sidebar-header">
+    <div class="admin-logo">
+      <i class="pi pi-cog"></i>
+      <span class="admin-title">Admin Panel</span>
+    </div>
+  </div>
+
+  <div class="sidebar-content">
+    <div class="user-info">
+      <div class="user-avatar">
+        <img src="assets/images/avatar-placeholder.png" alt="Admin User" onError="this.src='https://ui-avatars.com/api/?name=Admin&background=4F46E5&color=fff&size=100'">
+      </div>
+      <div class="user-details">
+        <h4 class="user-name">Admin User</h4>
+        <span class="user-role">Administrator</span>
+      </div>
+    </div>
+
+    <div class="menu-section">
+      <span class="section-label">MAIN NAVIGATION</span>
+      <ul class="menu-items">
+        <li class="menu-item">
+          <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <div class="menu-icon">
+              <i class="pi pi-home"></i>
+            </div>
+            <span class="menu-label">Dashboard</span>
+          </a>
+        </li>
+
+        <li class="menu-item">
+          <a routerLink="/admin/products" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <div class="menu-icon">
+              <i class="pi pi-box"></i>
+            </div>
+            <span class="menu-label">Products</span>
+            <span class="menu-badge">New</span>
+          </a>
+        </li>
+
+        <li class="menu-item">
+          <a routerLink="/admin/orders" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <div class="menu-icon">
+              <i class="pi pi-shopping-cart"></i>
+            </div>
+            <span class="menu-label">Orders</span>
+          </a>
+        </li>
+
+        <li class="menu-item" *ngIf="authService.hasRoleOrHigher('Admin')">
+          <a routerLink="/admin/registration-requests" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <div class="menu-icon">
+              <i class="pi pi-envelope"></i>
+            </div>
+            <span class="menu-label">Requests</span>
+          </a>
+        </li>
+
+        <li class="menu-item">
+          <a routerLink="/admin/customers" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <div class="menu-icon">
+              <i class="pi pi-users"></i>
+            </div>
+            <span class="menu-label">Customers</span>
+          </a>
+        </li>
+
+        <li class="menu-item">
+          <a routerLink="/admin/employee-management" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <div class="menu-icon">
+              <i class="pi pi-user-edit"></i>
+            </div>
+            <span class="menu-label">Employee</span>
+          </a>
+        </li>
+
+        <li class="menu-item" *ngIf="authService.hasRoleOrHigher('Admin')">
+          <a routerLink="/admin/category" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <div class="menu-icon">
+              <i class="pi pi-list"></i>
+            </div>
+            <span class="menu-label">Category</span>
+          </a>
+        </li>
+
+        <li class="menu-item" *ngIf="authService.hasRoleOrHigher('Admin')">
+          <a routerLink="/admin/brands" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <div class="menu-icon">
+              <i class="pi pi-tag"></i>
+            </div>
+            <span class="menu-label">Brand</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <span class="section-label">SETTINGS</span>
+      <ul class="menu-items">
+        <li class="menu-item">
+          <a routerLink="/admin/settings" routerLinkActive="active">
+            <div class="menu-icon">
+              <i class="pi pi-cog"></i>
+            </div>
+            <span class="menu-label">General Settings</span>
+          </a>
+        </li>
+
+        <li class="menu-item">
+          <a routerLink="/admin/profile" routerLinkActive="active">
+            <div class="menu-icon">
+              <i class="pi pi-user-edit"></i>
+            </div>
+            <span class="menu-label">Profile</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sidebar-footer">
+    <div class="action-buttons">
+      <a routerLink="/" title="View Website" class="footer-action">
+        <i class="pi pi-globe"></i>
+        <span class="action-label">View Site</span>
+      </a>
+
+      <a href="#" title="Logout" class="footer-action">
+        <i class="pi pi-power-off"></i>
+        <span class="action-label">Logout</span>
+      </a>
+    </div>
+  </div>
+</div>
+

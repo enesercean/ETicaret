@@ -1,0 +1,95 @@
+.category-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  min-width:400px;
+}
+
+.main-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.main-menu li {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.sub-menu-container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+  z-index: 1000;
+}
+
+.sub-menu {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.sub-menu-item {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.sub-menu-item:hover {
+  background-color: #f0f0f0;
+}
+
+.sub-sub-menu-container {
+  position: absolute;
+  top: 300%;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+  z-index: 1001;
+}
+
+.sub-sub-menu {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.sub-sub-menu-item {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.sub-sub-menu-item:hover {
+  background-color: #f0f0f0;
+}
+
+.sub-sub-sub-menu-container {
+  position: absolute;
+  top: 500%; /* Önceki menülerin toplam yüksekliğine göre ayarlayın */
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+  z-index: 1002; /* Diğer menülerden daha yüksek z-index */
+}
+
+.sub-sub-sub-menu {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.sub-sub-sub-menu-item {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.sub-sub-sub-menu-item:hover {
+  background-color: #f0f0f0;
+}

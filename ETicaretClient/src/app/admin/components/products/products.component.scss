@@ -1,0 +1,32 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0; // Remove any gap between components
+  padding: 0; // Remove padding
+  margin: 0; // Remove margin
+  background-color: #f8f9fa;
+  border-radius: 0; // Remove border radius
+  box-shadow: none; // Remove box shadow
+}
+
+.createProduct, .productList {
+  background-color: #ffffff;
+  border-radius: 0; // Remove border radius
+  padding: 0; // Remove padding
+  margin: 0; // Remove margin
+  box-shadow: none; // Remove box shadow
+}
+
+.createProduct {
+  margin-bottom: 0; // Remove bottom margin
+}
+
+.productList {
+  flex-grow: 1;
+}
+
+app-create, app-list, app-update-product-dialog {
+  width: 100%;
+  margin: 0; // Remove margin
+  padding: 0; // Remove padding
+}

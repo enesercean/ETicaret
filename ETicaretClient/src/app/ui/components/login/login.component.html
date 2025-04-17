@@ -1,0 +1,65 @@
+<div class="login-container">
+  <div class="login-card">
+    <h2 class="login-title animate-in">Welcome Back</h2>
+    <p class="login-subtitle animate-in">Sign in to your account</p>
+
+    <form [formGroup]="frm" (ngSubmit)="onSubmit(frm.value)" class="p-fluid">
+      <!-- Username/Email Field -->
+      <div class="field animate-in">
+        <span class="p-float-label">
+          <input id="inputUserNameOrEmail" type="text" pInputText formControlName="userNameOrEmail"
+                 [ngClass]="{'ng-dirty': frm.get('userNameOrEmail')?.invalid && frm.get('userNameOrEmail')?.touched}" autocomplete="off">
+          <label for="inputUserNameOrEmail">Username or Email</label>
+        </span>
+        <small *ngIf="frm.get('userNameOrEmail')?.invalid && frm.get('userNameOrEmail')?.touched" class="p-error">
+          <i class="pi pi-exclamation-circle"></i> Username or Email is required
+        </small>
+      </div>
+
+      <!-- Password Field -->
+      <div class="field animate-in">
+        <p-password id="inputPassword" formControlName="password" [toggleMask]="true"
+                    [ngClass]="{'ng-dirty': frm.get('password')?.invalid && frm.get('password')?.touched}"
+                    [feedback]="false" autocomplete="off"
+                    placeholder="Enter your password"></p-password>
+        <small *ngIf="frm.get('password')?.invalid && frm.get('password')?.touched" class="p-error">
+          <i class="pi pi-exclamation-circle"></i> Password is required
+        </small>
+      </div>
+
+      <!-- Remember Me & Forgot Password -->
+      <div class="remember-forgot animate-in">
+        <div class="remember-me">
+          <p-checkbox [binary]="true" inputId="remember" label="Remember me"></p-checkbox>
+        </div>
+        <a href="#" class="forgot-link">Forgot password?</a>
+      </div>
+
+      <!-- Sign In Button -->
+      <div class="button-container animate-in">
+        <p-button type="submit" label="Sign In" icon="pi pi-sign-in" [disabled]="frm.invalid"
+                  styleClass="p-button-raised login-button"></p-button>
+      </div>
+
+      <!-- Divider -->
+      <div class="divider animate-in">
+        <span>or continue with</span>
+      </div>
+
+      <!-- Social Login Buttons -->
+      <div class="social-login animate-in">
+        <div #googleLoginButton></div>
+        <button class="google-signin-btn" type="button">
+          <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google logo">
+          <span>Sign in with Google</span>
+        </button>
+      </div>
+
+      <!-- Sign Up Link -->
+      <div class="signup-link-container animate-in">
+        <span>Don't have an account?</span>
+        <a class="signup-link" routerLink="/register">Sign up</a>
+      </div>
+    </form>
+  </div>
+</div>

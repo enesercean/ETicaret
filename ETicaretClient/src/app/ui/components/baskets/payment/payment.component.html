@@ -1,0 +1,51 @@
+<div class="payment-container">
+  <h3>Payment</h3>
+
+  <form [formGroup]="paymentForm">
+    <p-inputgroup>
+      <p-inputgroup-addon>
+        <i class="pi pi-credit-card"></i>
+      </p-inputgroup-addon>
+      <input pInputText formControlName="cardNumber" placeholder="Card Number" [ngClass]="{'invalid': isInvalid('cardNumber')}" />
+    </p-inputgroup>
+
+    <p-inputgroup>
+      <p-inputgroup-addon>
+        <i class="pi pi-user"></i>
+      </p-inputgroup-addon>
+      <input pInputText formControlName="cardHolderName" placeholder="Card Holder Name" [ngClass]="{'invalid': isInvalid('cardHolderName')}" />
+    </p-inputgroup>
+
+    <div class="horizontal-fields">
+      <p-inputgroup>
+        <p-inputgroup-addon>
+          <i class="pi pi-calendar"></i>
+        </p-inputgroup-addon>
+        <input pInputText formControlName="expiryDate" placeholder="MM/YY" [ngClass]="{'invalid': isInvalid('expiryDate')}" />
+      </p-inputgroup>
+
+      <p-inputgroup>
+        <p-inputgroup-addon>
+          <i class="pi pi-key"></i>
+        </p-inputgroup-addon>
+        <input pInputText formControlName="cvv" placeholder="CVV" [ngClass]="{'invalid': isInvalid('cvv')}" />
+      </p-inputgroup>
+    </div>
+
+    <p-inputgroup>
+      <p-inputgroup-addon>
+        <i class="pi pi-calendar"></i>
+      </p-inputgroup-addon>
+      <p-dropdown formControlName="installment" [options]="installmentOptions" placeholder="Installments" [ngClass]="{'invalid': isInvalid('installment')}"></p-dropdown>
+    </p-inputgroup>
+
+    <p-inputgroup>
+      <p-inputgroup-addon>
+        <i class="pi pi-envelope"></i>
+      </p-inputgroup-addon>
+      <input pInputText formControlName="email" placeholder="Email" [ngClass]="{'invalid': isInvalid('email')}" />
+    </p-inputgroup>
+
+    <button pButton type="button" label="Save Payment" (click)="savePayment()" [disabled]="!isFormValid()"></button>
+  </form>
+</div>

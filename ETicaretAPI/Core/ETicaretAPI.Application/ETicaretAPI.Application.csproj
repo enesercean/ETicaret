@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.10.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.10.0" />
+    <PackageReference Include="Google.Apis.Auth" Version="1.68.0" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="MediatR.Extensions.Autofac.DependencyInjection" Version="12.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ETicaretAPI.Domain\ETicaretAPI.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\Commands\AppUser\CreateUser\" />
+    <Folder Include="Features\Commands\AppUser\LoginUser\" />
+    <Folder Include="Features\Commands\AppUser\GoogleLogin\" />
+    <Folder Include="Features\Commands\AppUser\RefreshTokenLogin\" />
+    <Folder Include="Features\Commands\ProductImageFile\DeleteProductImageFile\" />
+    <Folder Include="Features\Commands\ProductImageFile\UploadProductImageFile\" />
+    <Folder Include="Features\Commands\Product\DeleteProduct\" />
+    <Folder Include="Features\Commands\Product\UpdateProduct\" />
+    <Folder Include="Features\Queries\ProductImageFile\GetProductImage\" />
+    <Folder Include="Features\Queries\ProductImageFile\GetProductImageFileUrl\" />
+    <Folder Include="Features\Queries\Product\GetByIdProduct\" />
+    <Folder Include="Features\Queries\SupplierOrder\GetIncompletedSupplierOrder\" />
+  </ItemGroup>
+
+</Project>

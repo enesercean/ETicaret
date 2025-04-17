@@ -1,0 +1,37 @@
+<p-dialog header="Edit Product" [(visible)]="visible" [style]="{ width: '30rem' }" [draggable]="true" [baseZIndex]="10000" [modal]="true" appendTo="body" class="form-row">
+  <ng-container *ngIf="selectProduct">
+    <span class="p-text-secondary block mb-8" style="padding-bottom:40px;">Product: {{ selectProduct.name }}</span>
+
+    <div class="flex items-center gap-4 mb-4 form-row">
+      <label for="name" class="font-semibold w-24 fixed-label">Name</label>
+      <input pInputText id="name" [(ngModel)]="selectProduct.name" class="flex-auto" autocomplete="off" />
+    </div>
+
+    <div class="flex items-center gap-4 mb-8 form-row">
+      <label for="stock" class="font-semibold w-24 fixed-label">Stock</label>
+      <input pInputText id="stock" [(ngModel)]="selectProduct.stock" class="flex-auto" autocomplete="off" />
+    </div>
+
+    <div class="flex items-center gap-4 mb-8 form-row">
+      <label for="price" class="font-semibold w-24 fixed-label">Price</label>
+      <input pInputText id="price" [(ngModel)]="selectProduct.price" class="flex-auto" autocomplete="off" />
+    </div>
+
+    <div class="flex items-center gap-4 mb-8 form-row">
+      <label for="brand" class="font-semibold w-24 fixed-label">Brand</label>
+      <input pInputText id="brand" [(ngModel)]="selectProduct.brandName" class="flex-auto" autocomplete="off" />
+    </div>
+
+    <div class="flex items-center gap-4 mb-8 form-row">
+      <label for="category" class="font-semibold w-24 fixed-label">Category</label>
+      <input pInputText id="category" [(ngModel)]="selectProduct.category" class="flex-auto" autocomplete="off" />
+    </div>
+  </ng-container>
+
+  <ng-template pTemplate="footer form-row">
+    <div class="flex justify-end gap-2">
+      <p-button label="Cancel" styleClass="p-button-secondary" (click)="onDialogClose(false)" icon="pi pi-times" iconPos="left" />
+      <p-button label="Save" (click)="onDialogClose(false)" icon="pi pi-check" iconPos="left" />
+    </div>
+  </ng-template>
+</p-dialog>

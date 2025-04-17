@@ -1,0 +1,113 @@
+.card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin: 16px 0;
+}
+
+.productTable {
+  width: 100%;
+  border-collapse: collapse;
+
+  th, td {
+    padding: 12px 16px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f4f4f4;
+    color: #333;
+    font-weight: 600;
+    border-bottom: 2px solid #e0e0e0;
+  }
+
+  td {
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  tr:hover {
+    background-color: #f9f9f9;
+  }
+}
+
+.p-button-warning {
+  background-color: #ff9800;
+  border: none;
+  color: #fff;
+
+  &:hover {
+    background-color: #fb8c00;
+  }
+}
+
+.p-button-danger {
+  background-color: #f44336;
+  border: none;
+  color: #fff;
+
+  &:hover {
+    background-color: #e53935;
+  }
+}
+
+.p-button-rounded {
+  border-radius: 50%;
+}
+
+.p-button-text {
+  background-color: transparent;
+  color: #333;
+
+  &:hover {
+    background-color: #f4f4f4;
+  }
+}
+
+.p-confirmPopup {
+  .p-confirm-dialog {
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .p-confirm-dialog-message {
+    color: #333;
+  }
+
+  .p-confirm-dialog-footer {
+    .p-button {
+      margin-left: 8px;
+    }
+  }
+}
+
+.table-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.reload-button {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.reload-button .p-button-icon {
+  font-size: 1rem;
+}
+
+:host ::ng-deep .reload-button .p-button {
+  border-radius: 50%;
+}
+
+:host ::ng-deep .p-button.reload-button:hover {
+  background-color: var(--primary-color);
+  color: #2ecc71; /* Green icon color on hover */
+  transform: rotate(360deg);
+  transition: transform 0.5s ease-in-out, color 0.3s ease;
+}
+
+:host ::ng-deep .p-button.reload-button:hover .p-button-icon {
+  color: #2ecc71; /* Ensuring the icon itself turns green */
+}

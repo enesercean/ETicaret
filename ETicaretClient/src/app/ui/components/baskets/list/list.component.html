@@ -1,0 +1,87 @@
+<p-steps [(activeIndex)]="selectedStep" [model]="items" [readonly]="true" />
+<div class="basket-container">
+  <div *ngIf="selectedStep === 0">
+    <div class="products-list" *ngIf="products().length > 0; else noProducts">
+      <div *ngFor="let product of products()">
+        <div class="product-item">
+          <button icon="pi-trash" class="delete-button" (click)="removeProduct(product)"><i class="pi pi-trash"></i></button>
+          <img [src]="product.imageUrl" alt="{{ product.name }}" (error)="onImageError($event)">
+          <div class="product-details">
+            <h3>{{ product.name }}</h3>
+            <p>Price: {{ product.price * product.quantity | currency }}</p>
+          </div>
+          <div class="quantity-controls">
+            <button (click)="decreaseQuantity(product)">-</button>
+            <span>{{ product.quantity }}</span>
+            <button (click)="increaseQuantity(product)">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="selectedStep === 1" class="products-list">
+    <app-address (addressSaved)="onAddressSaved($event)"></app-address>
+  </div>
+  <div *ngIf="selectedStep === 2" class="products-list">
+    <app-payment (paymentSaved)="onPaymentSaved($event)"></app-payment>
+  </div>
+  <div *ngIf="selectedStep === 3" class="products-list">
+    <div class="products-list" *ngIf="products().length > 0; else noProducts">
+      <div *ngFor="let product of products()">
+        <div class="product-item">
+          <button icon="pi-trash" class="delete-button" (click)="removeProduct(product)"><i class="pi pi-trash"></i></button>
+          <img [src]="product.imageUrl" alt="{{ product.name }}" (error)="onImageError($event)">
+          <div class="product-details">
+            <h3>{{ product.name }}</h3>
+            <p>Price: {{ product.price * product.quantity | currency }}</p>
+          </div>
+          <div class="quantity-controls">
+            <button (click)="decreaseQuantity(product)">-</button>
+            <span>{{ product.quantity }}</span>
+            <button (click)="increaseQuantity(product)">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-confirmation #confirmationComponent [address]="address" [payment]="payment"></app-confirmation>
+  </div>
+  <div class="order-summary">
+    <h2>Order Summary</h2>
+    <div class="summary-items">
+      <p>Products Total: <span class="value">{{ productsTotal | currency }}</span></p>
+      <p>Shipping Total: <span class="value">{{ shippingTotal | currency }}</span></p>
+      <p *ngIf="discountAmount > 0">Discount ({{ discountRate * 100 }}%): <span class="value">-{{ discountAmount | currency }}</span></p>
+      <p *ngIf="taxAmount > 0">Tax ({{ taxRate }}): <span class="value">{{ taxAmount | currency }}</span></p>
+      <hr>
+      <p class="total-row"><strong>Total: <span class="value">{{ total | currency }}</span></strong></p>
+    </div>
+
+    <div class="promo-code" *ngIf="selectedStep === 0">
+      <p-inputGroup styleClass="promo-input-group">
+        <input type="text" pInputText placeholder="Promo code" style="width: 100%; min-width: 200px;">
+        <button type="button" pButton icon="pi pi-check" label="Apply" (click)="promoCodeApply()"></button>
+      </p-inputGroup>
+      <small>
+        promo message
+      </small>
+    </div>
+
+    <div class="summary-actions">
+      <button pButton type="button"
+              [label]="selectedStep === 3 ? 'Place Order' : selectedStep === 2 ? 'Continue to Review' : selectedStep === 1 ? 'Continue to Payment' : 'Proceed to Checkout'"
+              (click)="confirmOrder()"></button>
+    </div>
+
+    <div class="payment-methods" *ngIf="selectedStep === 0">
+      <p class="payment-label">Accepted Payment Methods</p>
+      <div class="payment-icons">
+        <i class="pi pi-credit-card" title="Credit Card"></i>
+        <i class="pi pi-paypal" title="PayPal"></i>
+        <i class="pi pi-wallet" title="Digital Wallet"></i>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #noProducts>
+  <p class="no-products">No products in the basket.</p>
+</ng-template>

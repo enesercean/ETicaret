@@ -1,0 +1,244 @@
+<div class="sell-with-us-container">
+  <!-- Hero Banner -->
+  <section class="hero-banner">
+    <div class="hero-content">
+      <h1>Partner With The Fastest Growing Marketplace</h1>
+      <p class="hero-subtitle">Expand your reach, boost your sales, and scale your business effortlessly</p>
+      <button pButton class="start-selling-btn" label="Start Selling Today" icon="pi pi-arrow-right" iconPos="right"
+              routerLink="/sellwithus/register-seller"></button>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-number">10M+</span>
+        <span class="stat-label">Active Shoppers</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">50K+</span>
+        <span class="stat-label">Successful Sellers</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">98%</span>
+        <span class="stat-label">Seller Satisfaction</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Sell With Us -->
+  <section class="why-sell-section">
+    <h2>Why Sell With Us?</h2>
+
+    <p-tabView>
+      <p-tabPanel header="Powerful Reach">
+        <div class="tab-content">
+          <div class="tab-image">
+            <img src="musterialaninizigenisletin.png" alt="Market Reach">
+          </div>
+          <div class="tab-text">
+            <h3>Expand Your Customer Base</h3>
+            <p>Access our 10+ million active shoppers looking for products like yours. Our marketing efforts bring a constant stream of qualified buyers directly to your products.</p>
+            <ul class="feature-list">
+              <li><i class="pi pi-check-circle"></i> Reach customers across the entire country</li>
+              <li><i class="pi pi-check-circle"></i> Built-in SEO optimization for your products</li>
+              <li><i class="pi pi-check-circle"></i> Featured placement opportunities</li>
+            </ul>
+          </div>
+        </div>
+      </p-tabPanel>
+
+      <p-tabPanel header="Simple Tools">
+        <div class="tab-content">
+          <div class="tab-image">
+            <img src="expendyour.jpg" alt="Seller Tools">
+          </div>
+          <div class="tab-text">
+            <h3>Easy-to-Use Seller Dashboard</h3>
+            <p>Our intuitive tools make listing, managing inventory, and processing orders effortless - even if you're new to e-commerce.</p>
+            <ul class="feature-list">
+              <li><i class="pi pi-check-circle"></i> Bulk listing and inventory management</li>
+              <li><i class="pi pi-check-circle"></i> Real-time analytics and sales reports</li>
+              <li><i class="pi pi-check-circle"></i> Mobile app to manage on the go</li>
+            </ul>
+          </div>
+        </div>
+      </p-tabPanel>
+
+      <p-tabPanel header="Secure Payments">
+        <div class="tab-content">
+          <div class="tab-image">
+            <img src="payment.jpg" alt="Secure Payments">
+          </div>
+          <div class="tab-text">
+            <h3>Reliable Payment Processing</h3>
+            <p>Focus on growing your business while we handle the payments. Get paid quickly and securely for every sale.</p>
+            <ul class="feature-list">
+              <li><i class="pi pi-check-circle"></i> Fast bi-weekly payouts</li>
+              <li><i class="pi pi-check-circle"></i> Fraud protection included</li>
+              <li><i class="pi pi-check-circle"></i> Transparent fee structure</li>
+            </ul>
+          </div>
+        </div>
+      </p-tabPanel>
+
+      <p-tabPanel header="Seller Support">
+        <div class="tab-content">
+          <div class="tab-image">
+            <img src="support.jpg" alt="Seller Support">
+          </div>
+          <div class="tab-text">
+            <h3>Dedicated Support Team</h3>
+            <p>You're never alone in your selling journey. Our dedicated seller support team is here to help you succeed.</p>
+            <ul class="feature-list">
+              <li><i class="pi pi-check-circle"></i> Personal onboarding assistance</li>
+              <li><i class="pi pi-check-circle"></i> 24/7 seller support hotline</li>
+              <li><i class="pi pi-check-circle"></i> Exclusive seller community access</li>
+            </ul>
+          </div>
+        </div>
+      </p-tabPanel>
+    </p-tabView>
+  </section>
+
+  <!-- How It Works -->
+  <section class="how-it-works">
+    <h2>Get Started in 3 Simple Steps</h2>
+
+    <div class="steps-container">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <div class="step-icon"><i class="pi pi-user-plus"></i></div>
+        <h3>Create Your Account</h3>
+        <p>Complete our simple application process in just minutes. No complicated forms or lengthy approval waits.</p>
+      </div>
+
+      <div class="step-connector"></div>
+
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <div class="step-icon"><i class="pi pi-box"></i></div>
+        <h3>List Your Products</h3>
+        <p>Upload your inventory with our bulk tools or add products individually with our easy listing creator.</p>
+      </div>
+
+      <div class="step-connector"></div>
+
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <div class="step-icon"><i class="pi pi-chart-bar"></i></div>
+        <h3>Start Selling</h3>
+        <p>That's it! Start receiving orders, fulfill them, and watch your business grow.</p>
+      </div>
+    </div>
+
+    <div class="start-now-container">
+      <button pButton class="start-selling-btn" label="Begin Your Seller Journey" icon="pi pi-arrow-right" iconPos="right"
+              routerLink="/sellwithus/register-seller"></button>
+    </div>
+  </section>
+
+  <!-- Success Stories -->
+  <section class="success-stories">
+    <h2>Seller Success Stories</h2>
+
+    <div class="story-carousel">
+      <p-carousel [value]="sellerStories" [numVisible]="1" [numScroll]="1" [circular]="true">
+        <ng-template pTemplate="item" let-story>
+          <div class="story-card">
+            <div class="story-content">
+              <div class="quote-mark"><i class="pi pi-quote-right"></i></div>
+              <p class="story-text">{{story.quote}}</p>
+              <div class="story-metrics">
+                <div class="metric">
+                  <span class="metric-value">{{story.growthPercent}}%</span>
+                  <span class="metric-label">Sales Growth</span>
+                </div>
+                <div class="metric">
+                  <span class="metric-value">{{story.monthsOnPlatform}}</span>
+                  <span class="metric-label">Months on Platform</span>
+                </div>
+              </div>
+            </div>
+            <div class="seller-info">
+              <img [src]="story.sellerImage" [alt]="story.sellerName">
+              <div>
+                <h4>{{story.sellerName}}</h4>
+                <p>{{story.businessType}}</p>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+  </section>
+
+  <!-- FAQ Accordion -->
+  <section class="faq-section">
+    <h2>Common Questions About Selling</h2>
+
+    <p-accordion styleClass="seller-faqs">
+      <p-accordionTab header="What types of products can I sell?">
+        <div class="faq-content">
+          <p>You can sell almost any legal product on our platform - from handmade crafts to electronics, clothing, home goods, beauty products, and more. We have specific policies regarding certain restricted items, which you can review in our seller policy guide.</p>
+        </div>
+      </p-accordionTab>
+
+      <p-accordionTab header="What are the fees for selling?">
+        <div class="faq-content">
+          <p>Our fee structure is straightforward and competitive:</p>
+          <ul>
+            <li>No monthly subscription required to get started</li>
+            <li>A small listing fee of $0.20 per item</li>
+            <li>5% transaction fee on the sale price (including shipping)</li>
+            <li>Payment processing fee of 3% + $0.25 per transaction</li>
+          </ul>
+          <p>Volume discounts are available for high-volume sellers.</p>
+        </div>
+      </p-accordionTab>
+
+      <p-accordionTab header="How do I handle shipping and returns?">
+        <div class="faq-content">
+          <p>You have flexible options for shipping:</p>
+          <ul>
+            <li>Ship items yourself using any carrier</li>
+            <li>Use our discounted shipping labels</li>
+            <li>Opt for our fulfillment service where we store and ship for you</li>
+          </ul>
+          <p>For returns, you can set your own return policy, but we recommend offering at least a 30-day return window for the best customer experience.</p>
+        </div>
+      </p-accordionTab>
+
+      <p-accordionTab header="How soon will I get paid?">
+        <div class="faq-content">
+          <p>We process payments every two weeks for all completed orders. Funds are directly deposited to your linked bank account. New sellers may have a 3-day hold period on their first few transactions as a security measure.</p>
+        </div>
+      </p-accordionTab>
+
+      <p-accordionTab header="What support do you offer to new sellers?">
+        <div class="faq-content">
+          <p>We provide comprehensive support to ensure your success:</p>
+          <ul>
+            <li>Dedicated onboarding specialist for the first 30 days</li>
+            <li>24/7 seller support via chat, email, and phone</li>
+            <li>Extensive knowledge base and video tutorials</li>
+            <li>Seller community forum for peer advice and networking</li>
+            <li>Monthly webinars on selling strategies and platform updates</li>
+          </ul>
+        </div>
+      </p-accordionTab>
+    </p-accordion>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="final-cta">
+    <div class="cta-container">
+      <h2>Ready to Expand Your Business?</h2>
+      <p>Join thousands of successful sellers who have grown their business with us</p>
+      <button pButton class="start-selling-btn-large" label="Start Selling Today" icon="pi pi-arrow-right" iconPos="right"
+              routerLink="/sellwithus/register-seller"></button>
+      <div class="contact-info">
+        <p>Have questions? Contact our Seller Support Team</p>
+        <a href="mailto:sellersetyourmarketplace.com"><i class="pi pi-envelope"></i> sellersetyourmarketplace.com</a>
+        <a href="tel:+18005551234"><i class="pi pi-phone"></i> 1-800-555-1234</a>
+      </div>
+    </div>
+  </section>
+</div>

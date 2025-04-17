@@ -1,0 +1,204 @@
+/* account-orders.component.scss */
+
+.account-orders-container {
+  padding: 1.5rem 0;
+
+  .page-header {
+    margin-bottom: 2rem;
+
+    h2 {
+      color: var(--text-color);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: var(--text-color-secondary);
+      margin: 0;
+    }
+  }
+
+  .filter-container {
+    .search-container {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      width: 100%;
+      max-width: 300px;
+
+      i {
+        position: absolute;
+        left: 0.75rem;
+        color: var(--text-color-secondary);
+        z-index: 1;
+      }
+
+      input {
+        width: 100%;
+        padding-left: 2.5rem; // Bu değer ikonun genişliği + biraz boşluk
+      }
+    }
+  }
+
+  .action-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.25rem;
+  }
+
+  .empty-state {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .empty-icon {
+      font-size: 3rem;
+      color: var(--text-color-secondary);
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      margin-bottom: 0.5rem;
+      color: var(--text-color);
+    }
+
+    p {
+      color: var(--text-color-secondary);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+  }
+}
+
+/* Order Details Dialog Styles */
+.order-details {
+  .order-summary {
+    background-color: var(--surface-50);
+    border-radius: 6px;
+
+    p {
+      margin: 0.25rem 0;
+    }
+
+    .font-bold {
+      font-weight: 600;
+      color: var(--text-color);
+    }
+  }
+
+  .product-item {
+    display: flex;
+    align-items: center;
+
+    img {
+      border-radius: 4px;
+      object-fit: cover;
+    }
+  }
+
+  .shipping-info, .payment-info {
+    h4 {
+      font-size: 1rem;
+      color: var(--text-color);
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      margin-top: 0;
+    }
+
+    p {
+      margin: 0.25rem 0;
+      line-height: 1.5;
+    }
+  }
+
+  .order-actions {
+    padding-top: 1rem;
+    border-top: 1px solid var(--surface-200);
+  }
+}
+
+/* Custom table styling */
+:host ::ng-deep {
+  .p-datatable {
+    .p-datatable-header {
+      background: var(--surface-0);
+      border: 1px solid var(--surface-200);
+      border-bottom: 0;
+      padding: 1rem;
+    }
+
+    th {
+      background: var(--surface-0);
+      color: var(--text-color);
+      font-weight: 600;
+    }
+
+    .p-tag {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.5rem;
+    }
+  }
+
+  .p-tabview .p-tabview-panels {
+    padding: 1.25rem 0;
+  }
+
+  .p-dialog .p-dialog-content {
+    padding-bottom: 1.5rem;
+  }
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .account-orders-container {
+    .p-datatable .p-datatable-tbody > tr > td {
+      padding: 0.5rem;
+    }
+
+    .action-buttons {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+
+  :host ::ng-deep .p-dialog {
+    width: 95% !important;
+  }
+}
+
+/* Style for the order status tags */
+:host ::ng-deep {
+  .p-tag.p-tag-success {
+    background-color: var(--green-100);
+    color: var(--green-800);
+  }
+
+  .p-tag.p-tag-info {
+    background-color: var(--blue-100);
+    color: var(--blue-800);
+  }
+
+  .p-tag.p-tag-warning {
+    background-color: var(--yellow-100);
+    color: var(--yellow-800);
+  }
+
+  .p-tag.p-tag-danger {
+    background-color: var(--red-100);
+    color: var(--red-800);
+  }
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px; /* Yeterli dikey alan sağlamak için */
+  width: 100%;
+  margin: 20px 0;
+}
+

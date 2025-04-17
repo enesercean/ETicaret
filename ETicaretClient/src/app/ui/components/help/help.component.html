@@ -1,0 +1,525 @@
+<div class="help-container">
+  <div class="help-header">
+    <h1>Yardım Merkezi</h1>
+    <p class="subtitle">Sorularınıza hızlı cevaplar bulun veya destek ekibimizle iletişime geçin</p>
+
+    <div class="search-box">
+      <span class="p-input-icon-left custom-input-icon">
+        <i class="pi pi-search"></i>
+        <input type="text" pInputText placeholder="Arama yapın veya soru sorun..." [(ngModel)]="searchQuery" (keyup.enter)="searchHelp()">
+      </span>
+      <button pButton type="button" label="Ara" (click)="searchHelp()" class="p-button-primary"></button>
+    </div>
+  </div>
+
+  <div class="quick-links">
+    <h2>Popüler Konular</h2>
+    <div class="links-grid">
+      <a (click)="scrollTo('orders')" class="quick-link-card">
+        <i class="pi pi-shopping-bag"></i>
+        <span>Siparişler</span>
+      </a>
+      <a (click)="scrollTo('returns')" class="quick-link-card">
+        <i class="pi pi-replay"></i>
+        <span>İade ve İptal</span>
+      </a>
+      <a (click)="scrollTo('shipping')" class="quick-link-card">
+        <i class="pi pi-truck"></i>
+        <span>Kargo ve Teslimat</span>
+      </a>
+      <a (click)="scrollTo('payment')" class="quick-link-card">
+        <i class="pi pi-credit-card"></i>
+        <span>Ödeme Seçenekleri</span>
+      </a>
+      <a (click)="scrollTo('account')" class="quick-link-card">
+        <i class="pi pi-user"></i>
+        <span>Hesap İşlemleri</span>
+      </a>
+      <a (click)="scrollTo('contact')" class="quick-link-card">
+        <i class="pi pi-envelope"></i>
+        <span>Bize Ulaşın</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="help-content">
+    <div class="help-sidebar">
+      <h3>Tüm Yardım Konuları</h3>
+      <ul class="nav-menu">
+        <li [class.active]="activeSection === 'orders'"><a (click)="scrollTo('orders')">Siparişler</a></li>
+        <li [class.active]="activeSection === 'returns'"><a (click)="scrollTo('returns')">İade ve İptal</a></li>
+        <li [class.active]="activeSection === 'shipping'"><a (click)="scrollTo('shipping')">Kargo ve Teslimat</a></li>
+        <li [class.active]="activeSection === 'payment'"><a (click)="scrollTo('payment')">Ödeme Seçenekleri</a></li>
+        <li [class.active]="activeSection === 'account'"><a (click)="scrollTo('account')">Hesap İşlemleri</a></li>
+        <li [class.active]="activeSection === 'products'"><a (click)="scrollTo('products')">Ürünler Hakkında</a></li>
+        <li [class.active]="activeSection === 'security'"><a (click)="scrollTo('security')">Güvenlik</a></li>
+        <li [class.active]="activeSection === 'contact'"><a (click)="scrollTo('contact')">Bize Ulaşın</a></li>
+      </ul>
+
+      <div class="need-more-help">
+        <h3>Daha Fazla Yardıma mı İhtiyacınız Var?</h3>
+        <button pButton type="button" label="Canlı Destek" icon="pi pi-comments" (click)="startLiveChat()" class="p-button-outlined p-button-success"></button>
+        <button pButton type="button" label="Destek Talebi Oluştur" icon="pi pi-ticket" (click)="createSupportTicket()" class="p-button-outlined"></button>
+      </div>
+    </div>
+
+    <div class="faq-sections">
+      <!-- Siparişler Section -->
+      <section id="orders" class="help-section">
+        <h2>Siparişler</h2>
+
+        <p-accordion [multiple]="true" styleClass="faq-accordion">
+          <p-accordionTab header="Siparişimi nasıl takip edebilirim?">
+            <div class="accordion-content">
+              <p>Siparişinizi takip etmek için:</p>
+              <ol>
+                <li>Hesabınıza giriş yapın</li>
+                <li>"Siparişlerim" bölümüne gidin</li>
+                <li>İlgili siparişi bulun ve "Sipariş Detayları" butonuna tıklayın</li>
+                <li>Kargo takip numarasına tıklayarak takip sayfasına yönlendirileceksiniz</li>
+              </ol>
+              <p>Ayrıca siparişiniz gönderildiğinde, kargo takip numarasını içeren bir e-posta alacaksınız.</p>
+            </div>
+          </p-accordionTab>
+
+          <p-accordionTab header="Siparişimi iptal edebilir miyim?">
+            <div class="accordion-content">
+              <p>Siparişiniz hazırlanma aşamasında ise iptal edebilirsiniz. Bunun için:</p>
+              <ol>
+                <li>Hesabınızda "Siparişlerim" sayfasına gidin</li>
+                <li>İptal etmek istediğiniz siparişi bulun</li>
+                <li>"İptal Et" butonuna tıklayın</li>
+              </ol>
+              <p><strong>Not:</strong> Eğer siparişiniz "Kargoya Verildi" durumunda ise artık iptal edilemez. Bu durumda ürünü teslim aldıktan sonra iade sürecini başlatmanız gerekir.</p>
+            </div>
+          </p-accordionTab>
+
+          <p-accordionTab header="Siparişimin durumunu nasıl öğrenebilirim?">
+            <div class="accordion-content">
+              <p>Siparişinizin güncel durumunu her zaman hesabınızdaki "Siparişlerim" sayfasından kontrol edebilirsiniz. Siparişleriniz aşağıdaki durumlardan birinde olabilir:</p>
+              <ul>
+                <li><strong>Onay Bekliyor:</strong> Siparişiniz alındı, ödeme onayı bekleniyor</li>
+                <li><strong>Hazırlanıyor:</strong> Siparişiniz depomuzda hazırlanıyor</li>
+                <li><strong>Kargoya Verildi:</strong> Siparişiniz kargo firmasına teslim edildi</li>
+                <li><strong>Teslim Edildi:</strong> Siparişiniz adresinize teslim edildi</li>
+                <li><strong>İptal Edildi:</strong> Siparişiniz iptal edildi</li>
+              </ul>
+              <p>Ayrıca siparişinizin durumu değiştikçe e-posta ile bilgilendirileceksiniz.</p>
+            </div>
+          </p-accordionTab>
+
+          <p-accordionTab header="Siparişim ne zaman gelecek?">
+            <div class="accordion-content">
+              <p>Teslimat süreleri şu şekildedir:</p>
+              <ul>
+                <li><strong>Standart Teslimat:</strong> 2-4 iş günü</li>
+                <li><strong>Hızlı Teslimat:</strong> 1-2 iş günü</li>
+                <li><strong>Aynı Gün Teslimat:</strong> Sadece belirli illerde, saat 14:00'e kadar verilen siparişler için geçerli</li>
+              </ul>
+              <p>Tatil günleri, olumsuz hava koşulları veya yoğun sipariş dönemlerinde teslimat süresi uzayabilir. Siparişinizin güncel durumunu her zaman takip edebilirsiniz.</p>
+            </div>
+          </p-accordionTab>
+
+          <p-accordionTab header="Siparişimde eksik/yanlış ürün geldi, ne yapmalıyım?">
+            <div class="accordion-content">
+              <p>Eğer siparişinizde eksik veya yanlış ürün teslim aldıysanız:</p>
+              <ol>
+                <li>Hesabınızda "Siparişlerim" bölümünden ilgili siparişi bulun</li>
+                <li>"Sorun Bildir" butonuna tıklayın</li>
+                <li>Sorunun detaylarını ve mümkünse fotoğraflarını ekleyin</li>
+              </ol>
+              <p>Müşteri hizmetleri ekibimiz en kısa sürede sizinle iletişime geçecektir. Bu tür sorunlar genellikle 24-48 saat içinde çözüme kavuşturulur.</p>
+            </div>
+          </p-accordionTab>
+        </p-accordion>
+      </section>
+
+      <!-- İade ve İptal Section -->
+      <section id="returns" class="help-section">
+        <h2>İade ve İptal</h2>
+
+        <p-accordion [multiple]="true" styleClass="faq-accordion">
+          <p-accordionTab header="Ürün iade politikanız nedir?">
+            <div class="accordion-content">
+              <p>Ürünlerimizi satın aldıktan sonra 14 gün içinde iade edebilirsiniz. İade koşulları şunlardır:</p>
+              <ul>
+                <li>Ürün kullanılmamış, denenmemiş ve orijinal ambalajında olmalıdır</li>
+                <li>Ürün etiketleri çıkarılmamış olmalıdır</li>
+                <li>Kozmetik ürünler, kişisel bakım ürünleri, iç giyim ve mayo gibi hijyenik ürünler açılmamış ve denenmemiş olmalıdır</li>
+                <li>Elektronik ürünler çalışır durumda ve kutusunda tüm aksesuarları ile birlikte olmalıdır</li>
+              </ul>
+              <p><strong>Not:</strong> Özel üretim veya kişiselleştirilmiş ürünler iade kapsamına girmez.</p>
+            </div>
+          </p-accordionTab>
+
+          <p-accordionTab header="İade sürecini nasıl başlatabilirim?">
+            <div class="accordion-content">
+              <p>İade sürecini başlatmak için:</p>
+              <ol>
+                <li>Hesabınıza giriş yapın</li>
+                <li>"Siparişlerim" bölümünden iade etmek istediğiniz ürünün olduğu siparişi bulun</li>
+                <li>"İade Talebi Oluştur" butonuna tıklayın</li>
+                <li>İade nedeninizi seçin ve gerekli açıklamaları yapın</li>
+                <li>İade etiketini yazdırın ve ürünü anlaşmalı kargo firmasına teslim edin</li>
+              </ol>
+              <p>İade talebiniz onaylandıktan ve ürün depomuzda kontrol edildikten sonra, ödemeniz 3-5 iş günü içinde iade edilir.</p>
+            </div>
+          </p-accordionTab>
+
+          <p-accordionTab header="İade kargo ücreti öder miyim?">
+            <div class="accordion-content">
+              <p>İade kargo ücretleri şu durumlara göre değişir:</p>
+              <ul>
+                <li><strong>Üründe kusur varsa veya yanlış ürün gönderdiyse:</strong> Kargo ücreti firmamız tarafından karşılanır</li>
+                <li><strong>Fikir değişikliği veya beğenmeme durumunda:</strong> Kargo ücreti müşteri tarafından karşılanır</li>
+              </ul>
+              <p>İade etiketini oluşturduğunuzda, hangi durumun geçerli olduğunu seçmeniz gerekir. Yanlış bilgi verilmesi durumunda iade işlemi reddedilebilir.</p>
+            </div>
+          </p-accordionTab>
+
+          <p-accordionTab header="İade ödemem ne zaman yapılır?">
+            <div class="accordion-content">
+              <p>İade ödemesi aşağıdaki süreçlere göre gerçekleşir:</p>
+              <ol>
+                <li>İade talebiniz sistem üzerinden onaylanır</li>
+                <li>Ürün depomuzda kontrol edilir (1-2 iş günü)</li>
+                <li>İade onaylandıktan sonra ödeme işlemi başlatılır (1-3 iş günü)</li>
+                <li>Bankanıza bağlı olarak ücret hesabınıza yansır (1-5 iş günü)</li>
+              </ol>
+              <p>Toplamda, ürünün depomuzda kontrol edildiği günden itibaren en geç 7 iş günü içinde ödemenizin hesabınıza geçmesi beklenir.</p>
+              <p><strong>Not:</strong> Kredi kartı ile yapılan ödemeler aynı karta iade edilir. Kapıda ödeme veya havale durumunda, banka hesap bilgilerinizi belirtmeniz gerekir.</p>
+            </div>
+          </p-accordionTab>
+        </p-accordion>
+      </section>
+
+      <!-- Kargo ve Teslimat Section -->
+      <section id="shipping" class="help-section">
+        <h2>Kargo ve Teslimat</h2>
+
+        <p-accordion [multiple]="true" styleClass="faq-accordion">
+          <p-accordionTab header="Kargo ücretleri ne kadar?">
+            <div class="accordion-content">
+              <p>Kargo ücretlerimiz şu şekildedir:</p>
+              <ul>
+                <li><strong>150 TL ve üzeri alışverişlerde:</strong> Ücretsiz kargo</li>
+                <li><strong>150 TL altı standart teslimat:</strong> 19,90 TL</li>
+                <li><strong>Hızlı teslimat:</strong> 29,90 TL</li>
+                <li><strong>Aynı gün teslimat (belirli illerde):</strong> 49,90 TL</li>
+              </ul>
+              <p>Özel kampanya dönemlerinde farklı kargo koşulları uygulanabilir. Güncel kampanyaları ana sayfamızdan takip edebilirsiniz.</p>
+            </div>
+          </p-accordionTab>
+
+          <p-accordionTab header="Teslimat süreleri nedir?">
+            <div class="accordion-content">
+              <p>Teslimat sürelerimiz şu şekildedir:</p>
+              <ul>
+                <li><strong>Standart Teslimat:</strong> 2-4 iş günü içinde</li>
+                <li><strong>Hızlı Teslimat:</strong> 1-2 iş günü içinde</li>
+                <li><strong>Aynı Gün Teslimat:</strong> İstanbul, Ankara, İzmir, Bursa ve Antalya'nın belirli bölgelerinde, saat 14:00'e kadar verilen siparişler için geçerlidir</li>
+              </ul>
+              <p>Siparişiniz onaylandıktan sonra, seçtiğiniz teslimat yöntemine göre belirtilen sürelerde adresinize ulaştırılır. Resmî tatiller, olumsuz hava koşulları veya beklenmedik durumlar teslimat süresini etkileyebilir.</p>
+            </div>
+          </p-accordionTab>
+
+          <p-accordionTab header="Hangi kargo firmaları ile çalışıyorsunuz?">
+            <div class="accordion-content">
+              <p>Siparişleriniz için aşağıdaki kargo firmalarıyla çalışmaktayız:</p>
+              <ul>
+                <li>Aras Kargo</li>
+                <li>Yurtiçi Kargo</li>
+                <li>MNG Kargo</li>
+                <li>PTT Kargo</li>
+                <li>Sürat Kargo (sadece belirli bölgelerde)</li>
+              </ul>
+              <p>Kargo firması seçimi, gönderim adresiniz ve ürünün bulunduğu depomuza göre otomatik olarak belirlenir. Özel durumlarda müşteri hizmetlerimiz ile iletişime geçerek tercihinizi belirtebilirsiniz.</p>
+            </div>
+          </p-accordionTab>
+
+          <p-accordionTab header="Kargo teslimatı sırasında yoktum, ne yapabilirim?">
+            <div class="accordion-content">
+              <p>Teslimat sırasında adresinizde bulunmamanız durumunda:</p>
+              <ol>
+                <li>Kargo görevlisi kapınıza bir "bilgilendirme notu" bırakır</li>
+                <li>Siparişiniz genellikle size en yakın kargo şubesine götürülür</li>
+                <li>Notta belirtilen kargo takip numarası ile ilgili kargo firmasını arayabilir veya web sitelerinden yeni teslimat talebi oluşturabilirsiniz</li>
+              </ol>
+              <p>Çoğu kargo firması siparişinizi 3 gün boyunca şubede bekletir. Bu süre içinde teslim alınmayan paketler firmamıza iade edilir.</p>
+              <p><strong>Öneri:</strong> Sipariş verirken teslimat adresine telefon numaranızı ve tam adres bilgilerinizi doğru girdiğinizden emin olun. Kargo görevlileri genellikle teslimat öncesi sizi arar.</p>
+            </div>
+          </p-accordionTab>
+
+          <p-accordionTab header="Teslimat için alternatif bir adres belirtebilir miyim?">
+            <div class="accordion-content">
+              <p>Evet, sipariş verirken farklı bir teslimat adresi belirtebilirsiniz:</p>
+              <ol>
+                <li>Sepetinizi onayladıktan sonra "Teslimat Adresi" adımına geldiğinizde "Yeni Adres Ekle" seçeneğini kullanabilirsiniz</li>
+                <li>İş yerinizi veya bir arkadaşınızın/akrabanızın adresini belirtebilirsiniz</li>
+              </ol>
+              <p><strong>Önemli:</strong> Sipariş verildikten sonra adres değişikliği yapılamaz. Eğer adres bilgilerinizde bir hata fark ettiyseniz, hemen müşteri hizmetlerimizle iletişime geçin.</p>
+            </div>
+          </p-accordionTab>
+        </p-accordion>
+      </section>
+
+            <!-- Ödeme Seçenekleri Section -->
+      <section id="payment" class="help-section">
+        <h2>Ödeme Seçenekleri</h2>
+
+        <p-accordion [multiple]="true" styleClass="faq-accordion">
+          <p-accordionTab header="Hangi ödeme yöntemlerini kabul ediyorsunuz?">
+            <div class="accordion-content">
+              <p>Aşağıdaki ödeme yöntemlerini kullanabilirsiniz:</p>
+              <ul>
+                <li><strong>Kredi/Banka Kartı:</strong> Visa, Mastercard, American Express</li>
+                <li><strong>Havale/EFT:</strong> Tüm banka hesaplarımıza</li>
+                <li><strong>Kapıda Ödeme:</strong> Nakit veya kart ile (ek ücret uygulanır)</li>
+                <li><strong>Alışveriş Kredisi:</strong> Anlaşmalı bankalarla</li>
+                <li><strong>Dijital Cüzdanlar:</strong> PayPal, Google Pay (yakında)</li>
+              </ul>
+              <p>Tüm ödemeleriniz 256-bit SSL ile şifrelenmiş güvenli bağlantı üzerinden gerçekleştirilir.</p>
+            </div>
+          </p-accordionTab>
+
+          <p-accordionTab header="Taksit seçenekleri nelerdir?">
+            <div class="accordion-content">
+              <p>Anlaşmalı bankaların kredi kartlarına taksit imkanları sunuyoruz:</p>
+              <div class="installment-table">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Banka</th>
+                      <th>3 Taksit</th>
+                      <th>6 Taksit</th>
+                      <th>9 Taksit</th>
+                      <th>12 Taksit</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>İş Bankası</td>
+                      <td><i class="pi pi-check"></i></td>
+                      <td><i class="pi pi-check"></i></td>
+                      <td><i class="pi pi-check"></i></td>
+                      <td><i class="pi pi-check"></i></td>
+                    </tr>
+                    <tr>
+                      <td>Garanti BBVA</td>
+                      <td><i class="pi pi-check"></i></td>
+                      <td><i class="pi pi-check"></i></td>
+                      <td><i class="pi pi-check"></i></td>
+                      <td><i class="pi pi-check"></i></td>
+                    </tr>
+                    <tr>
+                      <td>Yapı Kredi</td>
+                      <td><i class="pi pi-check"></i></td>
+                      <td><i class="pi pi-check"></i></td>
+                      <td><i class="pi pi-check"></i></td>
+                      <td><i class="pi pi-times"></i></td>
+                    </tr>
+                    <tr>
+                      <td>Akbank</td>
+                      <td><i class="pi pi-check"></i></td>
+                      <td><i class="pi pi-check"></i></td>
+                      <td><i class="pi pi-check"></i></td>
+                      <td><i class="pi pi-check"></i></td>
+                    </tr>
+                    <tr>
+                      <td>QNB Finansbank</td>
+                      <td><i class="pi pi-check"></i></td>
+                      <td><i class="pi pi-check"></i></td>
+                      <td><i class="pi pi-times"></i></td>
+                      <td><i class="pi pi-times"></i></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p><strong>Not:</strong> Özel kampanya dönemlerinde bankalara özel ek taksit fırsatları sunulabilir.</p>
+            </div>
+          </p-accordionTab>
+
+          <p-accordionTab header="Kapıda ödeme nasıl çalışır?">
+            <div class="accordion-content">
+              <p>Kapıda ödeme hizmetimiz şu şekilde çalışır:</p>
+              <ul>
+                <li>Sipariş verirken "Kapıda Ödeme" seçeneğini işaretleyebilirsiniz</li>
+                <li>Nakit veya kredi kartı ile ödeme yapabilirsiniz</li>
+                <li>Kapıda ödeme hizmeti için sipariş tutarınıza ek olarak 14,90 TL hizmet bedeli eklenir</li>
+                <li>Siparişiniz adresinize ulaştığında kargo görevlisine ödemenizi yapabilirsiniz</li>
+              </ul>
+              <p><strong>Önemli:</strong> Kapıda ödeme seçeneğinde paket içeriğini kontrol etme hakkınız vardır. Paketi açıp ürünü kontrol ettikten sonra ödemenizi yapabilirsiniz.</p>
+            </div>
+          </p-accordionTab>
+
+          <p-accordionTab header="Kredi kartı bilgilerim güvende mi?">
+            <div class="accordion-content">
+              <p>Kredi kartı bilgilerinizin güvenliği bizim için en önemli önceliktir:</p>
+              <ul>
+                <li>Tüm ödemeler 256-bit SSL şifreleme ile korunur</li>
+                <li>Kredi kartı bilgileriniz sistemimizde saklanmaz, sadece işlem anında kullanılır</li>
+                <li>PCI DSS (Payment Card Industry Data Security Standard) sertifikasına sahibiz</li>
+                <li>3D Secure ile ekstra güvenlik katmanı sağlanır</li>
+              </ul>
+              <p>Sitemiz, düzenli olarak güvenlik denetimlerinden geçirilir ve en son güvenlik teknolojileri kullanılır.</p>
+            </div>
+          </p-accordionTab>
+        </p-accordion>
+      </section>
+
+      <!-- Hesap İşlemleri Section -->
+      <section id="account" class="help-section">
+        <h2>Hesap İşlemleri</h2>
+
+        <p-accordion [multiple]="true" styleClass="faq-accordion">
+          <p-accordionTab header="Şifremi unuttum, ne yapmalıyım?">
+            <div class="accordion-content">
+              <p>Şifrenizi sıfırlamak için aşağıdaki adımları izleyebilirsiniz:</p>
+              <ol>
+                <li>Giriş sayfasında "Şifremi Unuttum" bağlantısına tıklayın</li>
+                <li>Kayıtlı e-posta adresinizi girin</li>
+                <li>E-posta adresinize gönderilen şifre sıfırlama bağlantısına tıklayın</li>
+                <li>Yeni şifrenizi belirleyin</li>
+              </ol>
+              <p>Şifre sıfırlama e-postası genellikle birkaç dakika içinde gelir. Spam/Junk klasörünüzü kontrol etmeyi unutmayın.</p>
+              <p>Hala sorun yaşıyorsanız, müşteri hizmetleri ile iletişime geçebilirsiniz.</p>
+            </div>
+          </p-accordionTab>
+
+          <p-accordionTab header="Hesap bilgilerimi nasıl güncellerim?">
+            <div class="accordion-content">
+              <p>Hesap bilgilerinizi güncellemek için:</p>
+              <ol>
+                <li>Hesabınıza giriş yapın</li>
+                <li>Sağ üst köşedeki profil ikonuna tıklayın</li>
+                <li>"Hesap Bilgilerim" seçeneğine tıklayın</li>
+                <li>Değiştirmek istediğiniz bilgileri güncelleyin</li>
+                <li>"Kaydet" butonuna tıklayın</li>
+              </ol>
+              <p>Güncelleyebileceğiniz bilgiler: Ad-soyad, telefon numarası, e-posta adresi, şifre, adres bilgileri ve bildirim tercihleri.</p>
+              <p><strong>Not:</strong> E-posta adresinizi değiştirirseniz, yeni e-posta adresinize bir doğrulama bağlantısı gönderilir.</p>
+            </div>
+          </p-accordionTab>
+
+          <p-accordionTab header="Hesabımı nasıl silebilirim?">
+            <div class="accordion-content">
+              <p>Hesabınızı kalıcı olarak silmek istiyorsanız:</p>
+              <ol>
+                <li>Hesabınıza giriş yapın</li>
+                <li>Sağ üst köşedeki profil ikonuna tıklayın</li>
+                <li>"Hesap Bilgilerim" > "Hesabımı Sil" seçeneğine tıklayın</li>
+                <li>Hesap silme nedeninizi belirtin (isteğe bağlı)</li>
+                <li>Şifrenizi girerek işlemi onaylayın</li>
+              </ol>
+              <p><strong>Önemli:</strong> Hesabınızı sildiğinizde:</p>
+              <ul>
+                <li>Tüm kişisel bilgileriniz KVKK kapsamında silinir</li>
+                <li>Sipariş geçmişiniz ve puanlarınız kaybolur</li>
+                <li>İşlem bekleyen aktif siparişleriniz varsa, hesabınız bu siparişler tamamlandıktan sonra silinir</li>
+              </ul>
+              <p>Hesap silme işlemi geri alınamaz. Emin değilseniz, hesabınızı silmek yerine bildirim ayarlarınızı değiştirebilirsiniz.</p>
+            </div>
+          </p-accordionTab>
+
+          <p-accordionTab header="Nasıl üye olurum?">
+            <div class="accordion-content">
+              <p>Sitemize üye olmak hızlı ve kolaydır:</p>
+              <ol>
+                <li>Ana sayfada sağ üst köşedeki "Üye Ol" butonuna tıklayın</li>
+                <li>E-posta adresinizi, adınızı ve soyadınızı girin</li>
+                <li>Güçlü bir şifre oluşturun</li>
+                <li>İletişim tercihlerinizi belirleyin</li>
+                <li>Üyelik sözleşmesini ve KVKK metnini onaylayın</li>
+                <li>"Üye Ol" butonuna tıklayın</li>
+              </ol>
+              <p>Üyelik işleminizi tamamlamak için e-posta adresinize bir doğrulama bağlantısı gönderilecektir. Bu bağlantıya tıklayarak hesabınızı aktifleştirebilirsiniz.</p>
+              <p>Alternatif olarak, Google veya Facebook hesabınızla da hızlıca üye olabilirsiniz.</p>
+            </div>
+          </p-accordionTab>
+        </p-accordion>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact" class="help-section">
+        <h2>Bize Ulaşın</h2>
+
+        <div class="contact-container">
+          <div class="contact-info">
+            <h3>İletişim Bilgilerimiz</h3>
+            <div class="contact-methods">
+              <div class="contact-method">
+                <i class="pi pi-phone"></i>
+                <div>
+                  <h4>Müşteri Hizmetleri</h4>
+                  <p>0850 123 45 67</p>
+                  <p class="detail-text">Hafta içi: 08:00 - 22:00 / Hafta sonu: 10:00 - 18:00</p>
+                </div>
+              </div>
+
+              <div class="contact-method">
+                <i class="pi pi-envelope"></i>
+                <div>
+                  <h4>E-posta</h4>
+                  <p>infoetenticaret.com</p>
+                  <p class="detail-text">E-postalarınıza genellikle 24 saat içinde yanıt veriyoruz</p>
+                </div>
+              </div>
+
+              <div class="contact-method">
+                <i class="pi pi-map-marker"></i>
+                <div>
+                  <h4>Adres</h4>
+                  <p>Eticaret Plaza, Bağdat Caddesi No:123, Kadıköy/İstanbul</p>
+                  <p class="detail-text">Mağazamız: Hafta içi 10:00 - 19:00 / Hafta sonu 11:00 - 17:00</p>
+                </div>
+              </div>
+
+              <div class="contact-method">
+                <i class="pi pi-comments"></i>
+                <div>
+                  <h4>Canlı Destek</h4>
+                  <p>Sitemizin sağ alt köşesindeki chat ikonuna tıklayarak</p>
+                  <p class="detail-text">Anlık destek için canlı destek ekibimiz ile görüşebilirsiniz</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-form">
+            <h3>Bize Mesaj Gönderin</h3>
+            <div class="form-field">
+              <label for="contactName">Adınız Soyadınız *</label>
+              <input id="contactName" type="text" pInputText [(ngModel)]="contactForm.name" required>
+            </div>
+
+            <div class="form-field">
+              <label for="contactEmail">E-posta Adresiniz *</label>
+              <input id="contactEmail" type="email" pInputText [(ngModel)]="contactForm.email" required>
+            </div>
+
+            <div class="form-field">
+              <label for="contactSubject">Konu *</label>
+              <p-select id="contactSubject" [options]="contactSubjects" [(ngModel)]="contactForm.subject"
+                        placeholder="Konu Seçin"></p-select>
+            </div>
+
+            <div class="form-field">
+              <label for="contactMessage">Mesajınız *</label>
+              <textarea id="contactMessage" pTextarea [(ngModel)]="contactForm.message" rows="5" required></textarea>
+            </div>
+
+            <div class="form-field">
+              <p-checkbox [(ngModel)]="contactForm.privacyAgreed" [binary]="true" inputId="privacyAgreed"></p-checkbox>
+              <label for="privacyAgreed" class="checkbox-label">Kişisel verilerimin işlenmesine izin veriyorum *</label>
+            </div>
+
+            <button pButton type="button" label="Mesaj Gönder" icon="pi pi-send"
+                    [disabled]="!contactForm.name || !contactForm.email || !contactForm.subject || !contactForm.message || !contactForm.privacyAgreed"
+                    (click)="sendContactForm()" class="p-button-raised"></button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+

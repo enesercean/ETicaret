@@ -1,0 +1,131 @@
+<div class="product-detail-container" *ngIf="product">
+  <div class="product-image-gallery">
+    <div class="main-image">
+      <img [src]="product.image" [alt]="product.name" (error)="$event.target['src']='/product.jpg'">
+    </div>
+    <div class="thumbnail-images" *ngIf="product.additionalImages?.length">
+      <div class="thumbnail" *ngFor="let image of product.additionalImages">
+        <img [src]="image" alt="Product thumbnail">
+      </div>
+    </div>
+  </div>
+
+  <div class="product-info">
+    <div class="product-header">
+      <h1 class="product-name">{{ product.name }}</h1>
+      <div class="product-rating" *ngIf="product.rating">
+        <span class="stars">
+          <i class="fas fa-star" *ngFor="let star of [1,2,3,4,5]"
+             [ngClass]="{'filled': star <= product.rating}"></i>
+        </span>
+        <span class="rating-count">({{ product.rating }} reviews)</span>
+      </div>
+    </div>
+
+    <div class="product-price">
+      <span class="current-price">{{ product.price | currency:'USD' }}</span>
+      <span class="original-price" *ngIf="product.price">
+        <s>{{ product.price | currency:'USD' }}</s>
+      </span>
+      <span class="discount-badge" *ngIf="product.price">
+        {{ calculateDiscount(product.price, product.price) }}% OFF
+      </span>
+    </div>
+
+    <div class="product-availability"
+         [ngClass]="{
+           'in-stock': product.stockStatus === 'INSTOCK',
+           'low-stock': product.stockStatus === 'LOWSTOCK',
+           'out-of-stock': product.stockStatus === 'OUTOFSTOCK'
+         }">
+      {{
+        product.stockStatus === 'INSTOCK' ? 'In Stock' :
+        product.stockStatus === 'LOWSTOCK' ? 'Low Stock - Order Soon!' : 'Out of Stock'
+      }}
+    </div>
+
+    <div class="product-description" *ngIf="product.description">
+      <h3>Description</h3>
+      <p>{{ product.description }}</p>
+    </div>
+
+    <div class="product-actions">
+      <div class="quantity-selector">
+        <button (click)="decreaseQuantity()">-</button>
+        <input type="number" [value]="quantity" min="1" (change)="onQuantityChange($event)">
+        <button (click)="increaseQuantity()">+</button>
+      </div>
+      <button class="add-to-cart-btn" [disabled]="product.stockStatus === 'OUTOFSTOCK'" (click)="addToCart(product)">
+        Add to Cart
+      </button>
+      <button class="wishlist-btn" (click)="toggleWishlist()">
+        <i class="far" [ngClass]="{'fa-heart': !isInWishlist, 'fa-heart filled': isInWishlist}"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="product-tabs" *ngIf="product">
+  <div class="tab-header">
+    <div class="tab" [ngClass]="{'active': activeTab === 'details'}" (click)="activeTab = 'details'">Details</div>
+    <div class="tab" [ngClass]="{'active': activeTab === 'reviews'}" (click)="activeTab = 'reviews'">Reviews</div>
+    <div class="tab" [ngClass]="{'active': activeTab === 'shipping'}" (click)="activeTab = 'shipping'">Shipping</div>
+  </div>
+  <div class="tab-content">
+    <div *ngIf="activeTab === 'details'" class="tab-pane">
+      <div [innerHTML]="product.description"></div>
+    </div>
+    <div *ngIf="activeTab === 'reviews'" class="tab-pane">
+      <div class="reviews-container" *ngIf="product.reviews?.length; else noReviews">
+        <div class="review" *ngFor="let review of product.reviews">
+          <div class="review-header">
+            <span class="reviewer-name">{{ review.userName}}</span>
+            <span class="review-date">{{ review.createdDate | date }}</span>
+          </div>
+          <div class="review-rating">
+            <i class="fas fa-star" *ngFor="let star of [1,2,3,4,5]"
+               [ngClass]="{'filled': star <= review.ratingValue}"></i>
+          </div>
+          <p class="review-text">{{ review.comment }}</p>
+        </div>
+      </div>
+      <ng-template #noReviews>
+        <p class="no-reviews">No reviews yet. Be the first to review this product!</p>
+      </ng-template>
+
+      <!-- Review Form -->
+      <div *ngIf="showReviewForm" class="review-form">
+        <h3>Write a Review</h3>
+        <form (ngSubmit)="submitReview(reviewForm.value)" #reviewForm="ngForm">
+          <div class="form-group">
+            <label for="rating">Rating</label>
+            <p-rating [(ngModel)]="review.rating" name="rating" required></p-rating>
+          </div>
+          <div class="form-group">
+            <label for="comment">Comment</label>
+            <textarea id="comment" [(ngModel)]="review.comment" name="comment" required></textarea>
+          </div>
+          <button type="button" class="submit-review-btn" (click)="review.rating ? submitReview(review) : checkRating($event)">Submit Review</button>
+        </form>
+      </div>
+    </div>
+    <div *ngIf="activeTab === 'shipping'" class="tab-pane">
+      <h3>Shipping Information</h3>
+      <p>Standard shipping: 3-5 business days</p>
+      <p>Express shipping: 1-2 business days</p>
+      <p>Free shipping on orders over $50</p>
+    </div>
+  </div>
+</div>
+
+<div class="related-products" *ngIf="relatedProducts?.length">
+  <h2>You may also like</h2>
+  <div class="related-products-grid">
+    <div class="related-product" *ngFor="let relatedProduct of relatedProducts">
+      <img [src]="relatedProduct.imageUrl" [alt]="relatedProduct.name">
+      <h4>{{ relatedProduct.name }}</h4>
+      <p class="related-product-price">{{ relatedProduct.price | currency:'USD' }}</p>
+      <button (click)="viewRelatedProduct(relatedProduct.id)" [routerLink]="['/products/productdetail', relatedProduct.id]">View</button>
+    </div>
+  </div>
+</div>

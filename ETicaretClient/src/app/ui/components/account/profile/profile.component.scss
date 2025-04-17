@@ -1,0 +1,185 @@
+// profile.component.scss
+.profile-container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .profile-layout {
+    display: flex;
+    gap: 24px;
+  }
+
+  .profile-sidebar {
+    width: 240px;
+    flex-shrink: 0;
+    background: #fff;
+    border-radius: 8px;
+    padding: 16px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    h3 {
+      padding: 0 16px 16px;
+      margin: 0;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .sidebar-menu {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        a {
+          display: flex;
+          align-items: center;
+          padding: 12px 16px;
+          color: #333;
+          text-decoration: none;
+          transition: all 0.2s;
+
+          i {
+            margin-right: 8px;
+          }
+
+          &:hover {
+            background: rgba(0, 0, 0, 0.03);
+            color: var(--primary-color);
+          }
+        }
+
+        &.active {
+          a {
+            background: rgba(var(--primary-color-rgb), 0.08);
+            color: var(--primary-color);
+            font-weight: 500;
+            border-right: 3px solid var(--primary-color);
+          }
+        }
+      }
+    }
+  }
+
+  .profile-content {
+    flex: 1;
+    background: #fff;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    .profile-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+
+      h2 {
+        margin: 0;
+        font-weight: 500;
+      }
+    }
+
+    .profile-card {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+
+      .profile-info-group {
+        flex: 1;
+        min-width: 300px;
+      }
+
+      .info-row {
+        display: flex;
+        margin-bottom: 16px;
+
+        .info-label {
+          width: 140px;
+          font-weight: 500;
+          color: #666;
+        }
+
+        .info-value {
+          flex: 1;
+          color: #333;
+
+          &.verification-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            .status-active {
+              color: var(--green-500);
+            }
+
+            .status-inactive {
+              color: var(--red-500);
+            }
+          }
+        }
+      }
+
+      .subscription-badge {
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 600;
+
+        &.standard {
+          background-color: #e9ecef;
+          color: #495057;
+        }
+
+        &.premium {
+          background-color: #ffe082;
+          color: #856404;
+        }
+
+        &.vip {
+          background-color: #c5cae9;
+          color: #1a237e;
+        }
+      }
+    }
+  }
+}
+
+.profile-edit-form {
+  .p-field {
+    margin-bottom: 16px;
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    input {
+      width: 100%;
+    }
+
+    .readonly-field {
+      background-color: #f5f5f5;
+      cursor: not-allowed;
+    }
+
+    small.form-text {
+      display: block;
+      margin-top: 4px;
+      color: #6c757d;
+      font-size: 12px;
+    }
+
+    small.p-error {
+      color: var(--red-500);
+    }
+  }
+
+  .dialog-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 24px;
+  }
+}

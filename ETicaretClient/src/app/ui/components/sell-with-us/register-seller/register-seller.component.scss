@@ -1,0 +1,277 @@
+.register-seller-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+
+  .register-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+
+    h1 {
+      font-size: 2.2rem;
+      color: var(--text-color);
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--text-secondary-color);
+    }
+  }
+
+  .register-content {
+    display: flex;
+    gap: 2rem;
+
+    .register-form-container {
+      flex: 3;
+      background: var(--surface-card);
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      padding: 2rem;
+
+      .step-content {
+        margin: 2rem 0;
+        min-height: 400px;
+
+        h2 {
+          margin-bottom: 1.5rem;
+          font-size: 1.6rem;
+          color: var(--primary-color);
+          border-bottom: 1px solid var(--surface-border);
+          padding-bottom: 0.75rem;
+        }
+
+        .form-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1.5rem;
+
+          .form-field {
+            &.full-width {
+              grid-column: span 2;
+            }
+
+            label {
+              display: block;
+              margin-bottom: 0.5rem;
+              font-weight: 500;
+            }
+
+            input, textarea, .p-dropdown, .p-multiselect, .p-inputmask {
+              width: 100%;
+            }
+          }
+        }
+
+        .upload-section {
+          margin-top: 2rem;
+
+          label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+          }
+        }
+
+        .terms-content {
+          margin-bottom: 1.5rem;
+          border: 1px solid var(--surface-border);
+          border-radius: 6px;
+
+          .terms-text {
+            padding: 1rem;
+
+            h3, h4 {
+              margin-top: 1rem;
+              margin-bottom: 0.5rem;
+            }
+
+            p {
+              margin-bottom: 1rem;
+              font-size: 0.95rem;
+              line-height: 1.5;
+            }
+          }
+        }
+
+        .agreements {
+          display: flex;
+          align-items: flex-start;
+          margin-bottom: 1rem;
+
+          .checkbox-label {
+            margin-left: 0.5rem;
+            line-height: 1.4;
+          }
+        }
+
+        .review-summary {
+          margin-top: 2rem;
+          background-color: var(--surface-hover);
+          padding: 1.5rem;
+          border-radius: 6px;
+
+          h3 {
+            margin-bottom: 0.75rem;
+            color: var(--primary-color);
+          }
+
+          .summary-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 1.5rem;
+
+            .summary-section {
+              flex: 1;
+              min-width: 250px;
+
+              h4 {
+                border-bottom: 1px solid var(--surface-border);
+                padding-bottom: 0.5rem;
+                margin-bottom: 1rem;
+              }
+
+              p {
+                margin-bottom: 0.5rem;
+                font-size: 0.95rem;
+              }
+            }
+          }
+        }
+      }
+
+      .step-actions {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--surface-border);
+
+        button {
+          min-width: 120px;
+
+          &:last-child {
+            margin-left: auto;
+          }
+        }
+      }
+    }
+
+    .register-info {
+      flex: 1;
+
+      .info-card {
+        background: var(--surface-card);
+        border-radius: 8px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+
+        h3 {
+          display: flex;
+          align-items: center;
+          margin-bottom: 1rem;
+          color: var(--primary-color);
+          font-size: 1.3rem;
+
+          i {
+            margin-right: 0.5rem;
+          }
+        }
+
+        ul {
+          list-style-type: none;
+          padding: 0;
+          margin: 0;
+
+          li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--surface-border);
+            position: relative;
+            padding-left: 1.5rem;
+
+            &:before {
+              content: "\2022";
+              color: var(--primary-color);
+              font-weight: bold;
+              position: absolute;
+              left: 0;
+            }
+
+            &:last-child {
+              border-bottom: none;
+            }
+          }
+        }
+
+        p {
+          margin-bottom: 1rem;
+          line-height: 1.5;
+
+          i {
+            margin-right: 0.5rem;
+            color: var(--primary-color);
+          }
+
+          a {
+            color: var(--primary-color);
+            text-decoration: none;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  }
+  // Responsive styles
+  @media (max-width: 992px) {
+    .register-content {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .register-form-container {
+      .step-content {
+        .form-grid {
+          grid-template-columns: 1fr !important;
+
+          .form-field.full-width {
+            grid-column: auto !important;
+          }
+        }
+
+        .review-summary {
+          .summary-details {
+            flex-direction: column;
+            gap: 1.5rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Custom styling for PrimeNG components
+::ng-deep {
+  .p-steps {
+    .p-steps-item {
+      .p-menuitem-link {
+        background: transparent;
+      }
+    }
+  }
+
+  .p-dropdown, .p-multiselect, .p-inputtext, .p-inputmask {
+    width: 100%;
+  }
+
+  .p-fileupload {
+    .p-fileupload-content {
+      padding: 1.5rem;
+    }
+  }
+}

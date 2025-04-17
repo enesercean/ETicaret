@@ -1,0 +1,57 @@
+<div class="product-list-container">
+  <h2 class="section-title">Most Popular Products</h2>
+
+  <div class="filters">
+    <p-dropdown placeholder="Filter by Brand" [options]="brands" optionLabel="name"
+                [(ngModel)]="selectedBrand" (onChange)="onBrandChange($event)"></p-dropdown>
+    <p-dropdown placeholder="Sort" [options]="sortOptions" optionLabel="name"
+                [(ngModel)]="selectedSort" (onChange)="onSortChange($event)"></p-dropdown>
+  </div>
+
+  <div class="products-grid">
+    <div class="product-card" *ngFor="let product of filteredProducts">
+      <div class="product-image-container">
+        <a [routerLink]="['/products/productdetail', product.id]" class="product-image-link" (click)="scrollToTop()">
+          <img [src]="product.image" [alt]="product.name" class="product-image" onerror=" this.src='product.jpg'">
+        </a>
+        <span class="stock-badge"
+              [ngClass]="{
+                'in-stock': product.stockStatus === 'In Stock',
+                'low-stock': product.stockStatus === 'Low Stock',
+                'out-stock': product.stockStatus === 'Out of Stock'
+              }">
+          {{product.stockStatus}}
+        </span>
+        <button pButton
+                [icon]="isFavorite(product) ? 'pi pi-heart-fill' : 'pi pi-heart'"
+                class="p-button-rounded p-button-secondary favorite-button"
+                [ngClass]="{'favorite-active': isFavorite(product)}"
+                (click)="toggleFavorite(product)"></button>
+      </div>
+
+      <div class="product-info">
+        <div class="brand-name">{{product.brandName}}</div>
+        <h3 class="product-name">{{product.name}}</h3>
+
+        <p-rating *ngIf="product.rating" [(ngModel)]="product.rating" [readonly]="true"></p-rating>
+
+        <div class="product-price-container">
+          <span class="product-price">{{product.price | currency:'$'}}</span>
+          <span class="stock-info" *ngIf="product.stock > 0">{{product.stock}} items</span>
+        </div>
+
+        <div class="product-actions">
+          <button pButton label="Add to Cart" icon="pi pi-shopping-cart" class="p-button-raised"
+                  (click)="addToCart(product)"></button>
+          <button pButton icon="pi pi-eye" class="p-button-outlined p-button-secondary" pTooltip="Details"
+                  [routerLink]="['/products/productdetail', product.id]" (click)="scrollToTop()"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p-paginator [rows]="rows"
+               [totalRecords]="totalProducts"
+               [rowsPerPageOptions]="rowsPerPageOptions"></p-paginator>
+</div>
+

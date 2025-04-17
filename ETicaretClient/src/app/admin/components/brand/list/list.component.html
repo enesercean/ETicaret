@@ -1,0 +1,67 @@
+<div class="card">
+  <div class="card-header mb-3">
+    <h5 class="card-title">Brands List</h5>
+  </div>
+
+  <p-table [value]="brands" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5, 10, 25]"
+           styleClass="brand-table" [loading]="loading"
+           [rowHover]="true" dataKey="brandId" responsiveLayout="stack">
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="name">Brand <p-sortIcon field="name"></p-sortIcon></th>
+        <th>Categories</th>
+        <th style="width: 100px">Actions</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-brand>
+      <tr>
+        <td>
+          <span class="p-column-title">Brand</span>
+          <div class="brand-name">
+            <span>{{ brand.name }}</span>
+          </div>
+        </td>
+        <td>
+          <span class="p-column-title">Categories</span>
+          <div class="brand-categories">
+            <ng-container *ngIf="brand.categories && brand.categories.length > 0; else noCategories">
+              <p-chip *ngFor="let category of brand.categories" [label]="category.name" styleClass="category-chip"></p-chip>
+            </ng-container>
+            <ng-template #noCategories>
+              <span class="text-muted">No categories assigned</span>
+            </ng-template>
+          </div>
+        </td>
+        <td>
+          <span class="p-column-title">Actions</span>
+          <div class="action-buttons">
+            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text" 
+                    (click)="confirmDelete(brand)" pTooltip="Delete Brand" tooltipPosition="top"></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="3" class="text-center p-4">
+          <div class="empty-state">
+            <i class="pi pi-tag empty-icon"></i>
+            <h3>No Brands Found</h3>
+            <p>No brands are available at the moment.</p>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="paginatorleft">
+      <div class="brands-count">
+        Total brands: {{brands?.length || 0}}
+      </div>
+    </ng-template>
+  </p-table>
+</div>
+
+<p-confirmDialog [style]="{width: '450px'}" header="Confirm Delete" icon="pi pi-exclamation-triangle"></p-confirmDialog>

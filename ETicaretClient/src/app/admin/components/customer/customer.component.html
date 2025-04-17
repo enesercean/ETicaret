@@ -1,0 +1,38 @@
+<div class="card">
+  <h2>User List</h2>
+  
+  <p-table [value]="users" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true" 
+           [rows]="10" [showCurrentPageReport]="true" 
+           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} users">
+    
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Username</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+    
+    <ng-template pTemplate="body" let-user>
+      <tr>
+        <td>{{ user.username || user.email }}</td>
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.phoneNumber || 'Not Specified' }}</td>
+        <td>
+          <button pButton pRipple type="button" icon="pi pi-trash" 
+                  class="p-button-rounded p-button-danger p-button-text"
+                  (click)="deleteUser(user)" pTooltip="Delete User"></button>
+        </td>
+      </tr>
+    </ng-template>
+    
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="5" style="text-align: center;">No users found.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

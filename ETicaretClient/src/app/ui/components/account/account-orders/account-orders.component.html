@@ -1,0 +1,180 @@
+<div class="account-orders-container">
+  <div class="page-header">
+    <h2 class="mb-3">My Orders</h2>
+    <p class="text-500">Track, view details or reorder from your order history</p>
+  </div>
+
+  <!-- Order Filters -->
+  <div class="filter-container mb-3">
+    <p-dropdown [options]="timeFilters" placeholder="Time Period" optionLabel="label" styleClass="mr-2"></p-dropdown>
+    <p-dropdown [options]="statusFilters" placeholder="Order Status" optionLabel="label" styleClass="mr-2"></p-dropdown>
+    <div class="p-input-icon-left search-container">
+      <i class="pi pi-search"></i>
+      <input pInputText type="text" placeholder="Search by Order ID" [(ngModel)]="searchText" />
+    </div>
+  </div>
+
+  <!-- Loading spinner -->
+  <div *ngIf="loading" class="loading-container p-4 text-center">
+    <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="5" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
+    <p class="mt-3">Loading your orders...</p>
+  </div>
+
+  <!-- Orders Table -->
+  <div *ngIf="!loading">
+    <p-table [value]="orders" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
+             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} orders"
+             [rowsPerPageOptions]="[5, 10, 20]" styleClass="p-datatable-gridlines">
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="id">Order ID <p-sortIcon field="id"></p-sortIcon></th>
+          <th pSortableColumn="createdDate">Order Date <p-sortIcon field="createdDate"></p-sortIcon></th>
+          <th pSortableColumn="totalPrice">Total <p-sortIcon field="totalPrice"></p-sortIcon></th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-order>
+        <tr>
+          <td>{{ order?.id || 'N/A' }}</td>
+          <td>{{ order?.createdDate | date:'medium' }}</td>
+          <td>{{ order?.totalPrice | currency:'USD' }}</td>
+          <td>
+            <p-tag value="Processing" severity="warn"></p-tag>
+          </td>
+          <td>
+            <div class="action-buttons">
+              <p-button icon="pi pi-eye" pTooltip="View Details" tooltipPosition="top"
+                        (click)="viewOrderDetails(order)" styleClass="p-button-rounded p-button-text p-button-sm"></p-button>
+              <p-button icon="pi pi-refresh" pTooltip="Reorder" tooltipPosition="top"
+                        (click)="reorder(order)" styleClass="p-button-rounded p-button-text p-button-sm"></p-button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="5" class="text-center p-5">
+            <div class="empty-state">
+              <i class="pi pi-shopping-bag empty-icon" style="font-size: 3rem; color: #ccc; margin-bottom: 1rem;"></i>
+              <h3>No Orders Found</h3>
+              <p>You haven't placed any orders yet. Start shopping to see your orders here.</p>
+              <p-button label="Start Shopping" icon="pi pi-shopping-cart" routerLink="/products"></p-button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <!-- No orders message (alternative display) -->
+  <div *ngIf="!loading && (!orders || orders.length === 0)" class="text-center p-5 mt-3">
+    <div class="empty-state">
+      <i class="pi pi-shopping-bag" style="font-size: 3rem; color: #ccc; margin-bottom: 1rem;"></i>
+      <h3>No Orders Found</h3>
+      <p>You haven't placed any orders yet. Start shopping to see your orders here.</p>
+      <p-button label="Start Shopping" icon="pi pi-shopping-cart" routerLink="/products"></p-button>
+    </div>
+  </div>
+</div>
+
+<!-- Order Details Dialog -->
+<p-dialog header="Order Details" [(visible)]="displayOrderDetails" [modal]="true" [style]="{width: '90%', maxWidth: '900px'}">
+  <div *ngIf="selectedOrder" class="order-details">
+    <div class="order-summary p-3 mb-3">
+      <div class="grid">
+        <div class="col-6 md:col-3">
+          <p class="font-bold">Order ID</p>
+          <p>{{ selectedOrder?.id || 'N/A' }}</p>
+        </div>
+        <div class="col-6 md:col-3">
+          <p class="font-bold">Order Date</p>
+          <p>{{ selectedOrder?.createdDate | date:'medium' }}</p>
+        </div>
+        <div class="col-6 md:col-3">
+          <p class="font-bold">Status</p>
+          <p-tag value="Processing" severity="warn"></p-tag>
+        </div>
+        <div class="col-6 md:col-3">
+          <p class="font-bold">Total</p>
+          <p>{{ selectedOrder?.totalPrice | currency:'USD' }}</p>
+        </div>
+      </div>
+    </div>
+
+    <p-tabView>
+      <p-tabPanel header="Items">
+        <p-table [value]="selectedOrder?.basketItems || []">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Subtotal</th>
+              <th>Actions</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-item>
+            <tr>
+              <td>
+                <div class="product-item">
+                  <span>{{ item?.productName }}</span>
+                </div>
+              </td>
+              <td>{{ item?.price | currency:'USD' }}</td>
+              <td>{{ item?.quantity }}</td>
+              <td>{{ (item?.price * item?.quantity) | currency:'USD' }}</td>
+              <td>
+                <p-button icon="pi pi-star" pTooltip="Rate Products" tooltipPosition="top"
+                          [routerLink]="['/products/productdetail', item?.productId]" [queryParams]="{ review: true }"
+                          styleClass="p-button-rounded p-button-text p-button-sm"></p-button>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="5" class="text-center p-3">
+                No items in this order.
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-tabPanel>
+
+      <p-tabPanel header="Customer Info">
+        <div class="customer-info p-3">
+          <h4>Customer Information</h4>
+          <p><strong>User:</strong> {{ selectedOrder?.userName || 'N/A' }}</p>
+          <p><strong>Order Tracking Code:</strong> {{ selectedOrder?.orderTrackingCode || 'N/A' }}</p>
+          <p><strong>Order Date:</strong> {{ selectedOrder?.createdDate | date:'medium' }}</p>
+          <p><strong>Status:</strong> Processing</p>
+        </div>
+      </p-tabPanel>
+
+      <p-tabPanel header="Shipping Info">
+        <div class="shipping-info p-3">
+          <h4>Shipping Information</h4>
+          <p><strong>Carrier:</strong> UPS</p>
+          <p><strong>Tracking Number:</strong> 1Z999AA10123456784</p>
+          <p><strong>Estimated Delivery:</strong> {{ selectedOrder?.createdDate | date:'shortDate' }}</p>
+          <p><strong>Shipping Address:</strong> 1234 Elm Street, Springfield, IL 62701</p>
+        </div>
+      </p-tabPanel>
+
+    </p-tabView>
+
+    <div class="order-actions mt-3 text-right">
+      <p-button label="Download Invoice" icon="pi pi-download" styleClass="p-button-outlined mr-2"></p-button>
+      <p-button label="Contact Support" icon="pi pi-comment"></p-button>
+    </div>
+  </div>
+
+  <!-- Loading state in dialog -->
+  <div *ngIf="!selectedOrder && displayOrderDetails" class="loading-container">
+    <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="5" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
+    <p class="mt-3">Loading order details...</p>
+  </div>
+</p-dialog>

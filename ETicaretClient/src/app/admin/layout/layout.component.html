@@ -1,0 +1,45 @@
+<div class="admin-layout">
+  <!-- Top Navigation Bar -->
+  <header class="admin-header">
+    <app-header></app-header>
+  </header>
+
+  <div class="admin-body">
+    <!-- Sidebar Navigation -->
+    <mat-sidenav-container class="admin-container">
+      <mat-sidenav #sidenav mode="side" opened class="admin-sidebar"
+                   [ngClass]="{'admin-sidebar-collapsed': sidebarCollapsed}">
+        <div class="sidebar-toggle" (click)="toggleSidebar()">
+          <i class="pi" [ngClass]="sidebarCollapsed ? 'pi-angle-right' : 'pi-angle-left'"></i>
+        </div>
+        <app-sidebar></app-sidebar>
+      </mat-sidenav>
+
+      <!-- Main Content Area -->
+      <mat-sidenav-content class="admin-content">
+        <!-- Breadcrumb & Page Title Bar -->
+        <div class="page-header">
+          <div class="breadcrumb">
+            <h1 class="page-title">Dashboard</h1>
+            <p-breadcrumb [model]="breadcrumbItems" [home]="home"></p-breadcrumb>
+          </div>
+
+          <div class="page-actions">
+            <p-button icon="pi pi-refresh" styleClass="p-button-rounded p-button-text"></p-button>
+            <p-button icon="pi pi-cog" styleClass="p-button-rounded p-button-text"></p-button>
+          </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="content-wrapper">
+          <router-outlet></router-outlet>
+        </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+
+  <!-- Footer -->
+  <footer class="admin-footer">
+    <app-footer></app-footer>
+  </footer>
+</div>

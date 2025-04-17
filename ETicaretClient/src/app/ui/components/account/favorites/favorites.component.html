@@ -1,0 +1,67 @@
+<div class="favorites-container">
+  <div class="favorites-header">
+    <h2><i class="pi pi-heart-fill" style="color: #e74c3c; margin-right: 10px;"></i>My Favorites</h2>
+    <p *ngIf="favorites?.length > 0">You have {{favorites.length}} favorite products.</p>
+    <p *ngIf="favorites?.length === 0" class="empty-message">You don't have any favorite products yet.</p>
+  </div>
+
+  <div class="favorites-grid" *ngIf="favorites?.length > 0">
+    <div class="favorite-card" *ngFor="let product of favorites">
+      <div class="favorite-actions">
+        <button class="remove-btn" (click)="removeFromFavorites(product.id)" title="Remove from Favorites">
+          <i class="pi pi-heart-fill" style="color: #e74c3c;"></i>
+        </button>
+      </div>
+      <div class="product-image">
+        <a [routerLink]="['/products/productdetail', product.id]" (click)="scrollToTop()">
+          <img [src]="product.image" [alt]="product.name" (error)="onImageError($event)">
+        </a>
+      </div>
+
+      <div class="product-info">
+        <h3 class="product-name">{{product.name}}</h3>
+        <p class="product-price">
+          <i class="pi pi-tag" style="margin-right: 5px;"></i>
+          {{product.price | currency:'USD':'symbol':'1.2-2'}}
+        </p>
+        <div class="product-details" *ngIf="product.brandName || product.supplierName">
+          <p *ngIf="product.brandName"><strong>Brand:</strong> {{product.brandName}}</p>
+          <p *ngIf="product.supplierName"><strong>Supplier:</strong> {{product.supplierName}}</p>
+        </div>
+        <p *ngIf="product.stockStatus" [ngClass]="{
+          'in-stock': product.stockStatus === 'INSTOCK',
+          'low-stock': product.stockStatus === 'LOWSTOCK',
+          'out-of-stock': product.stockStatus === 'OUTOFSTOCK'
+        }">
+          <i class="pi" [ngClass]="{
+            'pi-check-circle': product.stockStatus === 'INSTOCK',
+            'pi-exclamation-triangle': product.stockStatus === 'LOWSTOCK',
+            'pi-times-circle': product.stockStatus === 'OUTOFSTOCK'
+          }"></i>
+          {{product.stockStatus}}
+        </p>
+        <div class="action-buttons">
+          <button class="details-btn" [routerLink]="['/products/productdetail', product.id]" (click)="scrollToTop()">
+            <i class="pi pi-info-circle" style="margin-right: 5px;"></i>
+            Details
+          </button>
+          <button class="cart-btn" (click)="addToCart(product)">
+            <i class="pi pi-shopping-cart" style="margin-right: 5px;"></i>
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="empty-favorites" *ngIf="favorites?.length === 0">
+    <div class="empty-image">
+      <i class="pi pi-heart" style="font-size: 5rem; color: #ccc;"></i>
+    </div>
+    <p>You haven't added any favorite products yet.</p>
+    <button class="browse-btn" routerLink="/products" (click)="scrollToTop()">
+      <i class="pi pi-search" style="margin-right: 5px;"></i>
+      Explore Products
+    </button>
+  </div>
+</div>

@@ -1,0 +1,104 @@
+<div class="selectDiv">
+  <p-dropdown [options]="sortOptions" [(ngModel)]="selectedSortOption" name="sortOption"
+              optionLabel="label" optionValue="value"
+              placeholder="Select" styleClass="w-full md:w-56"
+              (onChange)="sortProducts()"></p-dropdown>
+</div>
+
+
+<p-splitter [panelSizes]="[20, 80]" [style]="{ height: 'auto' }" styleClass="mb-8">
+  <ng-template #panel>
+    <div class="filter-sidebar">
+      <div class="filter-section">
+        <h3>Categories</h3>
+        <p-treeselect class="category-selector"
+                      [(ngModel)]="selectedCategories"
+                      [options]="categories"
+                      name="categorySelect"
+                      placeholder="Select Categories"
+                      (ngModelChange)="onCategoryChange()"
+                      (onNodeUnselect)="updateSelectedNodes()"
+                      selectionMode="multiple"
+                      appendTo="body"></p-treeselect>
+      </div>
+
+
+      <div class="filter-section">
+        <h3>Price Range</h3>
+        <div class="price-range-inputs">
+          <div class="price-input-group">
+            <label>Min</label>
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon">$</span>
+              <p-inputnumber [(ngModel)]="minPrice" name="minPrice"
+                             [showButtons]="false"
+                             mode="decimal" [minFractionDigits]="0"></p-inputnumber>
+            </div>
+          </div>
+          <div class="price-input-group">
+            <label>Max</label>
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon">$</span>
+              <p-inputnumber [(ngModel)]="maxPrice" name="maxPrice"
+                             [showButtons]="false"
+                             mode="decimal" [minFractionDigits]="0"></p-inputnumber>
+            </div>
+          </div>
+        </div>
+        <button class="apply-filter-btn" (click)="filterByPriceRange()">
+          <i class="pi pi-filter"></i> Apply Filter
+        </button>
+      </div>
+
+
+      <div class="filter-section">
+        <h3>Brands</h3>
+        <p-multiselect [options]="brandOptions"
+                       [(ngModel)]="selectedBrands"
+                       name="brandSelect"
+                       placeholder="Select Brands"
+                       (onChange)="onBrandChange()"
+                       optionLabel="name"
+                       optionValue="name"
+                       [filter]="true"
+                       styleClass="brand-selector"
+                       appendTo="body"></p-multiselect>
+      </div>
+
+      <button class="clear-filters-btn" (click)="getProducts()">
+        <i class="pi pi-refresh"></i> Reset All Filters
+      </button>
+    </div>
+  </ng-template>
+
+  <ng-template #panel>
+    <div class="productDiv">
+      <div *ngFor="let product of displayedProducts" class="productComponent">
+        <img [src]="product.image" (error)="onImageError($event)" (click)="navigateToProduct(product.id)" />
+        <h4 class="productName">{{ product.name }}</h4>
+        <div class="BrandDiv">
+          <h6>{{product.brandName}}</h6>
+          <h6>{{product.supplierName}}</h6>
+        </div>
+        <div class="stockDiv" [ngClass]="{
+          'lowStock': product.stockStatus === 'LOWSTOCK',
+          'outOfStock': product.stockStatus === 'OUTOFSTOCK'
+        }">
+          <p>{{ product.stockStatus }}</p>
+        </div>
+
+        <h3>$ {{ product.price }}</h3>
+        <p-rating class="rating" [(ngModel)]="product.rating" [readonly]="true" [name]="'rating-' + product.id" />
+        <div class="btnDiv">
+          <p-button [icon]="isProductLiked(product.id) ? 'pi pi-heart-fill' : 'pi pi-heart'"
+                    severity="secondary"
+                    [outlined]="!isProductLiked(product.id)"
+                    (click)="toggleLike(product.id)"
+                    class="favoriteBtn" />
+          <p-button icon="pi pi-shopping-cart" styleClass="ml-2" severity="secondary" [outlined]="true"
+                    class="favoriteBtn" (click)="addToBasket(product)" />
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-splitter>

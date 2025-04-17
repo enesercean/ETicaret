@@ -1,0 +1,25 @@
+.card {
+  padding: 1.5rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 
+              0 1px 1px 0 rgba(0, 0, 0, 0.14), 
+              0 1px 3px 0 rgba(0, 0, 0, 0.12);
+  
+  h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+  }
+}
+
+:host ::ng-deep {
+  .p-datatable {
+    margin-bottom: 1rem;
+  }
+  
+  .p-button-rounded {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}

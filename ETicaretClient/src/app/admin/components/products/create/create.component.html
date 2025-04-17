@@ -1,0 +1,44 @@
+<div class="grid-container">
+  <p-inputgroup>
+    <p-inputgroup-addon>
+      <i class="pi pi-tag"></i>
+    </p-inputgroup-addon>
+    <input pInputText #txtName placeholder="Name" />
+  </p-inputgroup>
+
+  <p-inputgroup>
+    <p-inputgroup-addon>
+      <i class="pi pi-box"></i>
+    </p-inputgroup-addon>
+    <p-inputnumber #txtStock [min]="0" [value]="0" placeholder="Stock" />
+  </p-inputgroup>
+
+  <p-inputgroup>
+    <p-inputgroup-addon>$</p-inputgroup-addon>
+    <p-inputnumber #txtPrice [min]="0" [value]="0" placeholder="Price" />
+  </p-inputgroup>
+
+  <p-inputgroup>
+    <p-inputgroup-addon>
+      <i class="pi pi-list"></i>
+    </p-inputgroup-addon>
+    <p-multiselect [options]="categories"
+                   [(ngModel)]="selectedCategories"
+                   optionLabel="name"
+                   placeholder="Select Categories"
+                   [maxSelectedLabels]="5"
+                   styleClass="w-full"
+                   (ngModelChange)="updateSelectableCategories()"
+                   appendTo="body"
+                   [showToggleAll]="false">
+    </p-multiselect>
+  </p-inputgroup>
+  <p-inputgroup>
+    <p-select [options]="brands" [(ngModel)]="selectedBrand" (ngModelChange)="onBrandChange($event)" optionLabel="name" placeholder="Select a Brand" class="w-full md:w-56" />
+  </p-inputgroup>
+</div>
+
+<button mat-flat-button class="createProductBtn"
+        (click)="create(txtName, txtStock, txtPrice)">
+  Create Product
+</button>

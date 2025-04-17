@@ -1,0 +1,120 @@
+<div class="payment-options-container">
+  <div class="payment-options-header">
+    <h2>My Payment Methods</h2>
+    <button class="btn-add-payment" (click)="showAddDialog()">
+      <i class="pi pi-plus"></i> Add New Payment Method
+    </button>
+  </div>
+
+  <div class="payment-list" *ngIf="paymentMethods && paymentMethods.length > 0">
+    <div class="payment-card" *ngFor="let payment of paymentMethods">
+      <div class="payment-card-header">
+        <h3>{{ payment.cardName }}</h3>
+        <div class="payment-actions">
+          <button class="btn-edit" (click)="editPaymentMethod(payment.id.toString())">
+            <i class="pi pi-pencil"></i>
+          </button>
+          <button class="btn-delete" (click)="deletePaymentMethod(payment.id.toString())">
+            <i class="pi pi-trash"></i>
+          </button>
+        </div>
+      </div>
+      <div class="payment-card-body">
+        <p><i class="pi pi-credit-card" style="margin-right: 8px;"></i>**** **** **** {{ payment.cardNumber.substring(payment.cardNumber.length - 4) }}</p>
+        <p><i class="pi pi-calendar" style="margin-right: 8px;"></i>Expires: {{ payment.expiryMonth }}/{{ payment.expiryYear }}</p>
+        <p><i class="pi pi-user" style="margin-right: 8px;"></i>{{ payment.cardholderName }}</p>
+      </div>
+      <div class="payment-card-footer">
+        <button class="btn-make-default" (click)="setAsDefault(payment.id.toString())">
+          <i class="pi pi-check-circle" style="margin-right: 8px;"></i>Set as Default
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="no-payment" *ngIf="!paymentMethods || paymentMethods.length === 0">
+    <div class="empty-state">
+      <i class="pi pi-credit-card empty-icon"></i>
+      <h3>You don't have any saved payment methods yet</h3>
+      <p>Add payment methods to use for your orders</p>
+      <button class="btn-add-first-payment" (click)="showAddDialog()">
+        <i class="pi pi-plus" style="margin-right: 8px;"></i>Add Payment Method
+      </button>
+    </div>
+  </div>
+
+  <p-dialog [(visible)]="displayPaymentDialog" [header]="dialogHeader" [modal]="true"
+            [style]="{width: '50em'}" [maximizable]="true"
+            [baseZIndex]="10000">
+
+    <form [formGroup]="paymentForm" class="payment-form">
+      <div class="form-group">
+        <label for="cardName">Card Name</label>
+        <input type="text" pInputText id="cardName" formControlName="cardName" class="form-control">
+        <small class="p-error" *ngIf="paymentForm.get('cardName')?.invalid && paymentForm.get('cardName')?.touched">
+          Card name is required
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label for="cardholderName">Cardholder Name</label>
+        <input type="text" pInputText id="cardholderName" formControlName="cardholderName" class="form-control">
+        <small class="p-error" *ngIf="paymentForm.get('cardholderName')?.invalid && paymentForm.get('cardholderName')?.touched">
+          Cardholder name is required
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label for="cardNumber">Card Number</label>
+        <p-inputMask id="cardNumber" formControlName="cardNumber" mask="9999 9999 9999 9999" class="form-control"></p-inputMask>
+        <small class="p-error" *ngIf="paymentForm.get('cardNumber')?.invalid && paymentForm.get('cardNumber')?.touched">
+          Valid card number is required
+        </small>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col">
+          <label for="expiryMonth">Expiry Month</label>
+          <p-dropdown id="expiryMonth" [options]="months" formControlName="expiryMonth"
+                      optionLabel="name" optionValue="value" placeholder="MM" class="form-control"></p-dropdown>
+          <small class="p-error" *ngIf="paymentForm.get('expiryMonth')?.invalid && paymentForm.get('expiryMonth')?.touched">
+            Expiry month is required
+          </small>
+        </div>
+
+        <div class="form-group col">
+          <label for="expiryYear">Expiry Year</label>
+          <p-dropdown id="expiryYear" [options]="years" formControlName="expiryYear"
+                      optionLabel="name" optionValue="value" placeholder="YYYY" class="form-control"></p-dropdown>
+          <small class="p-error" *ngIf="paymentForm.get('expiryYear')?.invalid && paymentForm.get('expiryYear')?.touched">
+            Expiry year is required
+          </small>
+        </div>
+
+        <div class="form-group col">
+          <label for="cvv">CVV</label>
+          <p-inputMask id="cvv" formControlName="cvv" mask="999" class="form-control"></p-inputMask>
+          <small class="p-error" *ngIf="paymentForm.get('cvv')?.invalid && paymentForm.get('cvv')?.touched">
+            CVV is required
+          </small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="cardType">Card Type</label>
+        <p-dropdown id="cardType" [options]="cardTypes" formControlName="cardType"
+                    optionLabel="name" optionValue="value" placeholder="Select Card Type" class="form-control"></p-dropdown>
+        <small class="p-error" *ngIf="paymentForm.get('cardType')?.invalid && paymentForm.get('cardType')?.touched">
+          Card type is required
+        </small>
+      </div>
+    </form>
+
+    <ng-template pTemplate="footer">
+      <button pButton label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+      <button pButton label="Save" icon="pi pi-check" class="p-button-text" (click)="savePaymentMethod()" [disabled]="paymentForm.invalid"></button>
+    </ng-template>
+  </p-dialog>
+
+  <p-confirmDialog [style]="{width: '450px'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+</div>

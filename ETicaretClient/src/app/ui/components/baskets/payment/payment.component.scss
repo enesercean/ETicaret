@@ -1,0 +1,188 @@
+.payment-container {
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  margin: 24px 0;
+  background-color: #ffffff;
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+}
+
+h3 {
+  font-size: 1.8rem;
+  margin-bottom: 24px;
+  text-align: center;
+  color: #333;
+  font-weight: 600;
+}
+
+// Modern form styling
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+p-inputgroup {
+  margin-bottom: 0;
+  display: flex;
+
+  input, .p-dropdown {
+    height: 48px;
+    font-size: 15px;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+    border-color: #e0e0e0 !important;
+    transition: all 0.2s;
+
+    &:focus {
+      border-color: #3498db !important;
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1) !important;
+    }
+
+    &::placeholder {
+      color: #aaa;
+    }
+  }
+
+  .p-inputgroup-addon {
+    background-color: #f8f9fa !important;
+    border-color: #e0e0e0 !important;
+    border-radius: 8px 0 0 8px !important;
+    padding: 0 16px;
+
+    i {
+      color: #777;
+    }
+  }
+}
+
+.horizontal-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+
+  p-inputgroup {
+    margin-right: 0;
+  }
+}
+
+button {
+  height: 48px;
+  margin-top: 20px;
+  border-radius: 8px !important;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s;
+  background: linear-gradient(to right, #3498db, #2980b9) !important;
+  border: none !important;
+  width: 100%;
+
+  &:hover {
+    box-shadow: 0 6px 12px rgba(52, 152, 219, 0.2) !important;
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Credit card appearance enhancements
+.card-number-input {
+  font-family: 'Courier New', monospace;
+  letter-spacing: 1px;
+}
+
+// Invalid input styling
+.invalid input, .invalid .p-dropdown {
+  border-color: #e74c3c !important;
+  background-color: #fff8f8 !important;
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1) !important;
+  }
+}
+
+// Add some nice styles for dropdown components
+:host ::ng-deep {
+  .p-dropdown {
+    width: 100%;
+
+    .p-dropdown-label {
+      padding-top: 12px;
+    }
+
+    .p-dropdown-trigger {
+      color: #777;
+    }
+  }
+
+  .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+    padding: 12px 16px;
+
+    &.p-highlight {
+      background-color: #f0f7fc;
+      color: #3498db;
+    }
+
+    &:hover {
+      background-color: #f8f9fa;
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 576px) {
+  .payment-container {
+    padding: 16px;
+  }
+
+  h3 {
+    font-size: 1.6rem;
+  }
+}
+
+// Card type icon styling
+.card-type-icon {
+  margin-right: 8px;
+  font-size: 20px;
+
+  &.visa {
+    color: #1a1f71;
+  }
+
+  &.mastercard {
+    color: #eb001b;
+  }
+
+  &.amex {
+    color: #006fcf;
+  }
+
+  &.discover {
+    color: #ff6000;
+  }
+}
+
+// Add a subtle card pattern in the background
+.payment-container {
+  position: relative;
+  overflow: hidden;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: linear-gradient(to right, #3498db, #2980b9, #3498db);
+    opacity: 0.8;
+    border-radius: 12px 12px 0 0;
+  }
+}

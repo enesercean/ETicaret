@@ -1,0 +1,113 @@
+<div class="address-book-container">
+  <div class="address-book-header">
+    <h2>My Address Book</h2>
+    <button class="btn-add-address" (click)="showAddDialog()">
+      <i class="pi pi-plus"></i> Add New Address
+    </button>
+  </div>
+
+  <div class="address-list" *ngIf="addresses && addresses.length > 0">
+    <div class="address-card" *ngFor="let address of addresses">
+      <div class="address-card-header">
+        <h3>{{ address.name }}</h3>
+        <div class="address-actions">
+          <button class="btn-edit" (click)="editAddress(address.id.toString())">
+            <i class="pi pi-pencil"></i>
+          </button>
+          <button class="btn-delete" (click)="deleteAddress(address.id.toString())">
+            <i class="pi pi-trash"></i>
+          </button>
+        </div>
+      </div>
+      <div class="address-card-body">
+        <p><i class="pi pi-map-marker" style="margin-right: 8px;"></i>{{ address.addressDetail }}</p>
+        <p><i class="pi pi-home" style="margin-right: 8px;"></i>{{ address.city }}, {{ address.country }}</p>
+        <p><i class="pi pi-envelope" style="margin-right: 8px;"></i>Zip: {{ address.postalCode }}</p>
+        <p><i class="pi pi-phone" style="margin-right: 8px;"></i>Phone: {{ address.phoneNumber }}</p>
+      </div>
+      <div class="address-card-footer">
+        <button class="btn-make-default" (click)="setAsDefault(address.id.toString())">
+          <i class="pi pi-check-circle" style="margin-right: 8px;"></i>Set as Default
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="no-address" *ngIf="!addresses || addresses.length === 0">
+    <div class="empty-state">
+      <i class="pi pi-map-marker empty-icon"></i>
+      <h3>You don't have any saved addresses yet</h3>
+      <p>Add addresses to use for your orders</p>
+      <button class="btn-add-first-address" (click)="showAddDialog()">
+        <i class="pi pi-plus" style="margin-right: 8px;"></i>Add Address
+      </button>
+    </div>
+  </div>
+
+  <p-dialog [(visible)]="displayAddressDialog" [header]="dialogHeader" [modal]="true"
+            [style]="{width: '50em'}" [maximizable]="true"
+            [baseZIndex]="10000">
+
+    <form [formGroup]="addressForm" class="address-form">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" pInputText id="name" formControlName="name" class="form-control">
+        <small class="p-error" *ngIf="addressForm.get('name')?.invalid && addressForm.get('name')?.touched">
+          Name is required
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label for="addressDetail">Address Detail</label>
+        <textarea pInputTextarea id="addressDetail" formControlName="addressDetail"
+                  rows="3" class="form-control"></textarea>
+        <small class="p-error" *ngIf="addressForm.get('addressDetail')?.invalid && addressForm.get('addressDetail')?.touched">
+          Address detail is required
+        </small>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col">
+          <label for="city">City</label>
+          <input type="text" pInputText id="city" formControlName="city" class="form-control">
+          <small class="p-error" *ngIf="addressForm.get('city')?.invalid && addressForm.get('city')?.touched">
+            City is required
+          </small>
+        </div>
+
+        <div class="form-group col">
+          <label for="postalCode">Postal Code</label>
+          <input type="text" pInputText id="postalCode" formControlName="postalCode" class="form-control">
+          <small class="p-error" *ngIf="addressForm.get('postalCode')?.invalid && addressForm.get('postalCode')?.touched">
+            Postal code is required
+          </small>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col">
+          <label for="country">Country</label>
+          <input type="text" pInputText id="country" formControlName="country" class="form-control">
+          <small class="p-error" *ngIf="addressForm.get('country')?.invalid && addressForm.get('country')?.touched">
+            Country is required
+          </small>
+        </div>
+
+        <div class="form-group col">
+          <label for="phoneNumber">Phone Number</label>
+          <input type="text" pInputText id="phoneNumber" formControlName="phoneNumber" class="form-control">
+          <small class="p-error" *ngIf="addressForm.get('phoneNumber')?.invalid && addressForm.get('phoneNumber')?.touched">
+            Phone number is required
+          </small>
+        </div>
+      </div>
+    </form>
+
+    <ng-template pTemplate="footer">
+      <button pButton label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+      <button pButton label="Save" icon="pi pi-check" class="p-button-text" (click)="saveAddress()" [disabled]="addressForm.invalid"></button>
+    </ng-template>
+  </p-dialog>
+
+  <p-confirmDialog [style]="{width: '450px'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+</div>

@@ -1,0 +1,13 @@
+D:\ETicaret\ETicaretAPI\Core\ETicaretAPI.Domain\bin\Debug\net8.0\ETicaretAPI.Domain.deps.json
+D:\ETicaret\ETicaretAPI\Core\ETicaretAPI.Domain\bin\Debug\net8.0\ETicaretAPI.Domain.dll
+D:\ETicaret\ETicaretAPI\Core\ETicaretAPI.Domain\bin\Debug\net8.0\ETicaretAPI.Domain.pdb
+D:\ETicaret\ETicaretAPI\Core\ETicaretAPI.Domain\obj\Debug\net8.0\ETicaretAPI.Domain.csproj.AssemblyReference.cache
+D:\ETicaret\ETicaretAPI\Core\ETicaretAPI.Domain\obj\Debug\net8.0\ETicaretAPI.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\ETicaret\ETicaretAPI\Core\ETicaretAPI.Domain\obj\Debug\net8.0\ETicaretAPI.Domain.AssemblyInfoInputs.cache
+D:\ETicaret\ETicaretAPI\Core\ETicaretAPI.Domain\obj\Debug\net8.0\ETicaretAPI.Domain.AssemblyInfo.cs
+D:\ETicaret\ETicaretAPI\Core\ETicaretAPI.Domain\obj\Debug\net8.0\ETicaretAPI.Domain.csproj.CoreCompileInputs.cache
+D:\ETicaret\ETicaretAPI\Core\ETicaretAPI.Domain\obj\Debug\net8.0\ETicaretAPI.Domain.dll
+D:\ETicaret\ETicaretAPI\Core\ETicaretAPI.Domain\obj\Debug\net8.0\refint\ETicaretAPI.Domain.dll
+D:\ETicaret\ETicaretAPI\Core\ETicaretAPI.Domain\obj\Debug\net8.0\ETicaretAPI.Domain.pdb
+D:\ETicaret\ETicaretAPI\Core\ETicaretAPI.Domain\obj\Debug\net8.0\ref\ETicaretAPI.Domain.dll
+D:\ETicaret\ETicaretAPI\Core\ETicaretAPI.Domain\obj\Debug\net8.0\ETicaretAPI.Domain.sourcelink.json

@@ -1,0 +1,20 @@
+.fixed-label {
+  width: 50%; /* İstediğiniz genişliği ayarlayın */
+  display: inline-block; /* Label'ların yan yana durmasını sağlar */
+}
+
+.flex {
+  display: flex;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.form-row {
+  margin-bottom: 1rem; /* Satırlar arasına boşluk ekler */
+}

@@ -1,0 +1,35 @@
+<div class="card flex justify-content-center">
+  <p-button (onClick)="showDialog()" icon="pi pi-image" iconPos="left" />
+  <p-dialog header="Resim Ekle" [modal]="true" [(visible)]="visible" [style]="{ width: '50rem' }" appendTo="body">
+    <app-file-upload [options]="fileUploadOptions" (customEvent)="handleCustomEvent()"></app-file-upload>
+    <div class="card">
+      <p-carousel [value]="images"
+                  [numVisible]="3"
+                  [numScroll]="3"
+                  [circular]="false">
+        <ng-template pTemplate="item" let-item>
+          <div class="border border-surface rounded-border m-2 p-4">
+            <div class="mb-4">
+              <div class="relative mx-auto">
+                <img [src]="item.path"
+                     [alt]="selectProduct.name"
+                     class="w-full rounded-border"
+                     style="width:150px; height:150px;"/>
+                <p-tag [value]="selectProduct.name"
+                       class="absolute"
+                       styleClass="dark:!bg-surface-900"
+                       [ngStyle]="{ 'left.px': 5, 'top.px': 5 }" />
+              </div>
+            </div>
+            <div class="flex justify-between items-center">
+              <span>
+                <p-button label="Delete" (click)="deleteImage(item.id)" />
+              </span>
+            </div>
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+  </p-dialog>
+  
+</div>

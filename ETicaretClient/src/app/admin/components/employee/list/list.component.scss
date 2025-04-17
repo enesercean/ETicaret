@@ -1,0 +1,114 @@
+/* src/app/admin/components/employee/list/list.component.scss */
+:host {
+  display: block;
+}
+
+.font-bold {
+  font-weight: 600;
+}
+
+.mt-4 {
+  margin-top: 1.5rem;
+}
+
+.mb-4 {
+  margin-bottom: 1.5rem;
+}
+
+.p-fluid .field {
+  margin-bottom: 1rem;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.flex {
+  display: flex;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.p-3 {
+  padding: 1rem;
+}
+
+.m-0 {
+  margin: 0;
+}
+
+/* Table styling */
+:host ::ng-deep {
+  .p-datatable-gridlines .p-datatable-thead > tr > th {
+    background-color: #f8f9fa;
+  }
+
+  .p-tag {
+    font-weight: 600;
+  }
+
+  .p-button-sm {
+    padding: 0.4rem;
+    height: 2rem;
+    width: 2rem;
+  }
+
+  .p-button-outlined {
+    background-color: transparent;
+    color: #2196F3;
+    border: 1px solid #2196F3;
+
+    &:hover {
+      background-color: rgba(33, 150, 243, 0.04);
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 0.2rem rgba(33, 150, 243, 0.2);
+    }
+  }
+  /* Dialog ve dropdown ayarları */
+  .p-dialog-content {
+    overflow-y: visible !important;
+  }
+  /* Dropdown panel için yükseklik ve scroll ayarları */
+  .p-dropdown-panel {
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  /* Dropdown panel body için scroll */
+  .p-dropdown-items-wrapper {
+    max-height: 200px;
+  }
+}
+.text-muted {
+  color: #6c757d;
+}
+
+/* Reload button spinning animation */
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.pi-refresh.p-button-loading-icon {
+  animation: spin 1s linear infinite;
+}

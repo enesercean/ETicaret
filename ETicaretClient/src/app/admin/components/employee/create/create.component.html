@@ -1,0 +1,119 @@
+<div class="create-container">
+  <p-card styleClass="mb-4">
+    <div class="flex justify-content-between align-items-center">
+      <h4 class="m-0">Employee Management</h4>
+      <p-button label="Assign Employee Role" icon="pi pi-user-plus" (click)="showDialog()"></p-button>
+    </div>
+  </p-card>
+</div>
+
+<!-- Employee Creation Dialog -->
+<p-dialog [(visible)]="displayDialog"
+          [style]="{width: '80vw'}"
+          header="Assign Employee Role"
+          [modal]="true"
+          [draggable]="false"
+          [resizable]="false"
+          appendTo="body">
+
+  <div class="grid">
+    <!-- User Search Section -->
+    <div class="col-12 md:col-5">
+      <p-panel header="Search Customer Users">
+        <form [formGroup]="userSearchForm" (ngSubmit)="searchUser()">
+          <div class="field">
+            <label for="username" class="font-bold">Username</label>
+            <div class="p-inputgroup">
+              <input id="username" type="text" pInputText formControlName="username"
+                     placeholder="Enter username to search">
+              <button type="submit" pButton icon="pi pi-search" [disabled]="userSearchForm.invalid || loading"></button>
+            </div>
+            <small *ngIf="userSearchForm.get('username')?.invalid && userSearchForm.get('username')?.touched"
+                   class="p-error">Username is required (min 3 characters)</small>
+          </div>
+        </form>
+
+        <p-divider></p-divider>
+
+        <p-table [value]="searchResults" styleClass="p-datatable-sm" [loading]="loading"
+                 responsiveLayout="scroll" [rowHover]="true">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Username</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Action</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-user>
+            <tr [ngClass]="{'selected-row': selectedUser && selectedUser.id === user.id}">
+              <td>{{ user.username }}</td>
+              <td>{{ user.name }}</td>
+              <td>{{ user.email }}</td>
+              <td>
+                <button pButton icon="pi pi-user-edit" class="p-button-rounded p-button-sm p-button-info"
+                        (click)="selectUser(user)" pTooltip="Select User"></button>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="4" class="text-center">
+                <div *ngIf="searchResults.length === 0 && !loading">
+                  No users found. Try another username.
+                </div>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-panel>
+    </div>
+
+    <!-- Role Assignment Section -->
+    <div class="col-12 md:col-7">
+      <p-panel header="Assign Employee Role">
+        <div *ngIf="!selectedUser" class="text-center p-4">
+          <i class="pi pi-user text-4xl text-secondary mb-3"></i>
+          <p>Please select a customer from the search results to assign a role.</p>
+        </div>
+
+        <div *ngIf="selectedUser">
+          <div class="mb-4 p-3 surface-100 border-round">
+            <h5>Selected User</h5>
+            <div class="grid">
+              <div class="col-12 md:col-6">
+                <p><span class="font-bold">Username:</span> {{ selectedUser.username }}</p>
+                <p><span class="font-bold">Name:</span> {{ selectedUser.name }}</p>
+              </div>
+              <div class="col-12 md:col-6">
+                <p><span class="font-bold">Email:</span> {{ selectedUser.email }}</p>
+                <p><span class="font-bold">Current Role:</span> {{ selectedUser.role }}</p>
+              </div>
+            </div>
+          </div>
+
+          <form [formGroup]="roleAssignForm" (ngSubmit)="assignRole()">
+            <div class="field">
+              <label for="role" class="font-bold">Select Role to Assign</label>
+              <p-select id="role" formControlName="role" [options]="roles" optionLabel="name" optionValue="value"
+                        placeholder="Select a role" styleClass="w-full"></p-select>
+              <small *ngIf="roleAssignForm.get('role')?.invalid && roleAssignForm.get('role')?.touched"
+                     class="p-error">Role is required</small>
+            </div>
+
+            <div class="flex gap-2 justify-content-end mt-4">
+              <button pButton type="button" label="Cancel" class="p-button-outlined p-button-secondary"
+                      (click)="resetForms()"></button>
+              <button pButton type="submit" label="Assign Role" icon="pi pi-check"
+                      [disabled]="roleAssignForm.invalid || loading"></button>
+            </div>
+          </form>
+        </div>
+      </p-panel>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+  </ng-template>
+</p-dialog>

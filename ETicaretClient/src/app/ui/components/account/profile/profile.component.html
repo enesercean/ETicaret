@@ -1,0 +1,141 @@
+<div class="profile-container">
+  <div class="profile-layout">
+    <!-- Sidebar -->
+    <div class="profile-sidebar">
+      <h3>My Account</h3>
+      <ul class="sidebar-menu">
+        <li [class.active]="currentSection === 'profile'">
+          <a routerLink="/account/profile">
+            <i class="pi pi-user"></i> My Profile
+          </a>
+        </li>
+        <li [class.active]="currentSection === 'orders'">
+          <a routerLink="/account/orders">
+            <i class="pi pi-shopping-bag"></i> My Orders
+          </a>
+        </li>
+        <li [class.active]="currentSection === 'coupons'">
+          <a routerLink="/account/discountcoupon">
+            <i class="pi pi-ticket"></i> Discount Coupons
+          </a>
+        </li>
+        <li [class.active]="currentSection === 'favorites'">
+          <a routerLink="/account/favorites">
+            <i class="pi pi-heart"></i> Favorites
+          </a>
+        </li>
+        <li [class.active]="currentSection === 'addresses'">
+          <a routerLink="/account/addresses">
+            <i class="pi pi-map-marker"></i> Address Book
+          </a>
+        </li>
+        <li [class.active]="currentSection === 'payment'">
+          <a routerLink="/account/payment">
+            <i class="pi pi-credit-card"></i> Payment Information
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Profile Content -->
+    <div class="profile-content">
+      <div class="profile-header">
+        <h2>My Profile</h2>
+        <button pButton type="button" icon="pi pi-pencil" label="Edit"
+                class="p-button-outlined" (click)="openEditDialog()"></button>
+      </div>
+
+      <div class="profile-details">
+        <div class="profile-card">
+          <div class="profile-info-group">
+            <div class="info-row">
+              <div class="info-label">Username:</div>
+              <div class="info-value">{{user?.username}}</div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-label">Full Name:</div>
+              <div class="info-value">{{user?.name}}</div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-label">Email:</div>
+              <div class="info-value">{{user?.email}}</div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-label">Phone:</div>
+              <div class="info-value">{{user?.phoneNumber || 'Not specified'}}</div>
+            </div>
+          </div>
+
+          <div class="profile-info-group">
+            <div class="info-row">
+              <div class="info-label">Two-Factor Authentication:</div>
+              <div class="info-value verification-status">
+                <i class="pi" [ngClass]="user?.twoFactorEnabled ? 'pi-check-circle status-active' : 'pi-times-circle status-inactive'"></i>
+                {{user?.twoFactorEnabled ? 'Enabled' : 'Disabled'}}
+              </div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-label">Subscription Type:</div>
+              <div class="info-value">
+                <span class="subscription-badge" [ngClass]="getSubscriptionClass()">
+                  {{user?.subscriptionType || 'Standard'}}
+                </span>
+              </div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-label">Registration Date:</div>
+              <div class="info-value">{{user?.registrationDate | date:'dd.MM.yyyy'}}</div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-label">Last Update:</div>
+              <div class="info-value">{{user?.lastUpdated | date:'dd.MM.yyyy HH:mm'}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Profile Dialog -->
+<p-dialog header="Edit Profile Information" [(visible)]="displayEditDialog"
+          [style]="{width: '450px'}" [modal]="true" [closable]="true" [draggable]="false">
+  <form [formGroup]="profileForm" (ngSubmit)="updateProfile()" class="profile-edit-form">
+    <div class="p-field">
+      <label for="username">Username</label>
+      <input id="username" type="text" pInputText formControlName="username" [readonly]="true" class="readonly-field">
+      <small class="form-text text-muted">Username cannot be changed</small>
+    </div>
+
+    <div class="p-field">
+      <label for="name">Full Name *</label>
+      <input id="name" type="text" pInputText formControlName="name" required>
+      <small *ngIf="profileForm.get('name')?.errors?.['required'] && profileForm.get('name')?.touched" class="p-error">
+        Full name is required.
+      </small>
+    </div>
+
+    <div class="p-field">
+      <label for="email">Email</label>
+      <input id="email" type="email" pInputText formControlName="email" [readonly]="true" class="readonly-field">
+      <small class="form-text text-muted">Email address cannot be changed</small>
+    </div>
+
+    <div class="p-field">
+      <label for="phone">Phone</label>
+      <p-inputMask id="phone" mask="(999) 999-9999" formControlName="phoneNumber" placeholder="(___) ___-____"></p-inputMask>
+    </div>
+
+    <div class="dialog-footer">
+      <button pButton type="button" label="Cancel" icon="pi pi-times" class="p-button-text"
+              (click)="displayEditDialog = false"></button>
+      <button pButton type="submit" label="Save" icon="pi pi-check" [disabled]="profileForm.invalid"></button>
+    </div>
+  </form>
+</p-dialog>

@@ -1,0 +1,80 @@
+<div class="card">
+  <div class="card-header">
+    <h5 class="card-title">Create New Brand</h5>
+  </div>
+  <div class="card-body">
+    <div class="mb-4">
+      <label for="brandName" class="form-label">Brand Name</label>
+      <input 
+        type="text" 
+        class="form-control" 
+        id="brandName" 
+        placeholder="Enter brand name" 
+        [(ngModel)]="brandName"
+        [disabled]="loading">
+    </div>
+
+    <div class="mb-4">
+      <label class="form-label">Select Categories</label>
+      <div class="alert alert-info" *ngIf="loading">
+        <i class="pi pi-spin pi-spinner"></i> Loading categories...
+      </div>
+      
+      <div class="categories-container" *ngIf="!loading">
+        <div *ngIf="categories.length === 0" class="alert alert-warning">
+          No categories found. Please add categories first.
+        </div>
+        
+        <div class="category-list" *ngIf="categories.length > 0">
+          <div class="category-tree">
+            <ng-container *ngTemplateOutlet="categoryTreeTemplate; context: { $implicit: categories }"></ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="selected-categories mb-4" *ngIf="selectedCategories.length > 0">
+      <label class="form-label">Selected Categories:</label>
+      <div class="selected-list">
+        <span class="badge bg-primary me-2 mb-2" *ngFor="let category of selectedCategories">
+          {{ category.Name }}
+          <button type="button" class="btn-close btn-close-white ms-1" 
+            (click)="toggleCategorySelection(category)" aria-label="Remove"></button>
+        </span>
+      </div>
+    </div>
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <button 
+        class="btn btn-primary" 
+        [disabled]="loading || !brandName || selectedCategories.length === 0" 
+        (click)="createBrand()">
+        <span *ngIf="createLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+        Create Brand
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-template #categoryTreeTemplate let-categories>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let category of categories">
+      <div class="form-check d-flex align-items-center">
+        <input 
+          class="form-check-input me-2" 
+          type="checkbox" 
+          [id]="'category-' + category.Id" 
+          [checked]="category.selected"
+          (change)="toggleCategorySelection(category)">
+        <label class="form-check-label" [for]="'category-' + category.Id">
+          {{ category.Name }}
+        </label>
+      </div>
+      
+      <!-- Recursive template for subcategories -->
+      <div class="ms-4 mt-2" *ngIf="category.subCategories && category.subCategories.length > 0">
+        <ng-container *ngTemplateOutlet="categoryTreeTemplate; context: { $implicit: category.subCategories }"></ng-container>
+      </div>
+    </li>
+  </ul>
+</ng-template>

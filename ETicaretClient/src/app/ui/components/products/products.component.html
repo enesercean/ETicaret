@@ -1,0 +1,52 @@
+<div class="category-menu" (mouseleave)="hideAllMenus()">
+  <ul class="main-menu">
+    <li *ngFor="let category of mainCategories"
+        (mouseenter)="showSubMenu(category)"
+        (click)="showCategoryInfo(category)">
+      {{ category.name }}
+    </li>
+  </ul>
+
+  <!-- Sub Menu -->
+  <div class="sub-menu-container"
+       *ngIf="isSubMenuVisible"
+       (mouseenter)="keepMenusVisible()">
+    <div class="sub-menu">
+      <div *ngFor="let subCategory of getSubCategories(selectedCategory)"
+           class="sub-menu-item"
+           (mouseenter)="showSubSubMenu(subCategory)"
+           (click)="showCategoryInfo(subCategory)">
+        {{ subCategory.name }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Sub-Sub Menu -->
+  <div class="sub-sub-menu-container"
+       *ngIf="isSubSubMenuVisible"
+       (mouseenter)="keepMenusVisible()">
+    <div class="sub-sub-menu">
+      <div *ngFor="let subSubCategory of getSubCategories(selectedSubCategory)"
+           class="sub-sub-menu-item"
+           (mouseenter)="showSubSubSubMenu(subSubCategory)"
+           (click)="showCategoryInfo(subSubCategory)">
+        {{ subSubCategory.name }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Sub-Sub-Sub Menu (3. Seviye) -->
+  <div class="sub-sub-sub-menu-container"
+       *ngIf="isSubSubSubMenuVisible"
+       (mouseenter)="keepMenusVisible()">
+    <div class="sub-sub-sub-menu">
+      <div *ngFor="let subSubSubCategory of getSubCategories(selectedSubSubCategory)"
+           class="sub-sub-sub-menu-item"
+           (click)="showCategoryInfo(subSubSubCategory)">
+        {{ subSubSubCategory.name }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
